@@ -54,14 +54,38 @@
 		A61128441D7D679200B6AC5A /* OBSLY */ = {
 			isa = PBXGroup;
 			children = (
+				A61128581D7D687000B6AC5A /* LaunchScreen */,
+				A61128571D7D683A00B6AC5A /* Main */,
+				A61128591D7D687A00B6AC5A /* Resources */,
 				A61128451D7D679200B6AC5A /* AppDelegate.swift */,
-				A61128471D7D679200B6AC5A /* ViewController.swift */,
-				A61128491D7D679200B6AC5A /* Main.storyboard */,
-				A611284C1D7D679200B6AC5A /* Assets.xcassets */,
-				A611284E1D7D679200B6AC5A /* LaunchScreen.storyboard */,
 				A61128511D7D679200B6AC5A /* Info.plist */,
 			);
 			path = OBSLY;
+			sourceTree = "<group>";
+		};
+		A61128571D7D683A00B6AC5A /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				A61128471D7D679200B6AC5A /* ViewController.swift */,
+				A61128491D7D679200B6AC5A /* Main.storyboard */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		A61128581D7D687000B6AC5A /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				A611284E1D7D679200B6AC5A /* LaunchScreen.storyboard */,
+			);
+			name = LaunchScreen;
+			sourceTree = "<group>";
+		};
+		A61128591D7D687A00B6AC5A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A611284C1D7D679200B6AC5A /* Assets.xcassets */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,10 +274,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = OBSLY/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Tunik.OBSLY;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -261,10 +288,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = OBSLY/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Tunik.OBSLY;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
