@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class OBAddBookViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -15,9 +16,12 @@ class OBAddBookViewController: UIViewController, UITableViewDelegate, UITableVie
     
     let InputDataCellIdentifier = "InputDataCell"
     let InputDataTableViewCellIdentifier = "InputDataTableViewCell"
-    let booksArrayKey = "BooksArray"
-    var finalBookName: String = ""
-    let defaults = NSUserDefaults.standardUserDefaults()
+    let fieldsToInput = 1
+    let inputSections = 1
+    
+    var books = [NSManagedObject]()
+    
+    var bookKey: String = ""
     
 //MARK: UIViewController lifecycle
     override func viewDidLoad() {
@@ -28,69 +32,120 @@ class OBAddBookViewController: UIViewController, UITableViewDelegate, UITableVie
         dataInputTableView.delegate = self
         dataInputTableView.dataSource = self
         
-        
-        
+        getKeyForBook()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        print("2nd vc \(defaults.dictionaryForKey(booksArrayKey))")
+    override func viewWillAppear(_ animated: Bool) {
+        
     }
 
 //MARK: UITableViewDataSource
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return inputSections
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return fieldsToInput
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        tableView.registerNib(UINib(nibName: InputDataTableViewCellIdentifier, bundle: nil), forCellReuseIdentifier: InputDataCellIdentifier)
-        let cell = tableView.dequeueReusableCellWithIdentifier(InputDataCellIdentifier, forIndexPath: indexPath) as! InputDataTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        tableView.register(UINib(nibName: InputDataTableViewCellIdentifier, bundle: nil), forCellReuseIdentifier: InputDataCellIdentifier)
+        let cell = tableView.dequeueReusableCell(withIdentifier: InputDataCellIdentifier, for: indexPath) as! InputDataTableViewCell
         cell.fieldTitle.text = "Name"
         
         return cell
     }
     
 //MARK: Private Methods
-    @IBAction func saveAction(sender: UIBarButtonItem) {
-        let index = NSIndexPath.init(forItem: 0, inSection: 0)
-        
-        let bookNameCell = self.dataInputTableView.cellForRowAtIndexPath(index)
+    @IBAction func saveAction(_ sender: UIBarButtonItem) {
+        let index = IndexPath.init(item: 0, section: 0)
+        let bookNameCell = self.dataInputTableView.cellForRow(at: index)
         
         for view: UIView in bookNameCell!.contentView.subviews {
             if (view is UITextField) {
                 let bookNameField = (view as! UITextField)
-                var oldBooksDict = self.defaults.dictionaryForKey(self.booksArrayKey)
-                let counter = self.defaults.integerForKey("counter")
-                self.defaults.setInteger(counter + 1, forKey: "counter")
-                if oldBooksDict == nil  {
-                    let bookDict: [String: String] = [bookNameField.text!: "\(self.defaults.integerForKey("counter"))"]
-                    self.defaults.setObject(bookDict, forKey: self.booksArrayKey)
-                } else  {
-                    oldBooksDict?[bookNameField.text!] = "\(self.defaults.integerForKey("counter"))"
-                    let newBooksDict = oldBooksDict
-                    self.defaults.setObject(newBooksDict, forKey: self.booksArrayKey)
-                    print("2nd vc \(self.defaults.dictionaryForKey(self.booksArrayKey))")
+                if bookNameField.text == ""    {
+                    let alert = UIAlertController(title: "Oops!", message: "Please fill up the empty field(s)", preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alert.addAction(defaultAction)
+                    present(alert, animated: true, completion: nil)
+                } else {
+                    let bookNameFromField = bookNameField.text!
+                    self.saveBook(name: bookNameFromField)
+                    self.dismiss(animated: true, completion: nil)
                 }
-                
-//                let newBook: [String: String] = ["\(bookNameField.text)": "test book key value"]
-                
-//                self.defaults.setObject(bookDict, forKey: self.booksArrayKey)
-                print("2nd vc \(self.defaults.dictionaryForKey(self.booksArrayKey))")
             }
         }
-//        self.dataInputTableView.registerNib(UINib(nibName: InputDataTableViewCellIdentifier, bundle: nil), forCellReuseIdentifier: InputDataCellIdentifier)
-        //            let bookNameCell = self.tableView(self.dataInputTableView, cellForRowAtIndexPath: index)
-//        let bookNameCell = self.dataInputTableView.dequeueReusableCellWithIdentifier(self.InputDataCellIdentifier, forIndexPath: index) as! InputDataTableViewCell
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            
-        })
     }
     
-    @IBAction func cancelAction(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func saveBook(name: String) {
+        let managedContext = DataController().managedObjectContext
+        let entity =  NSEntityDescription.entity(forEntityName: "Book", in:managedContext)
+        let book = NSManagedObject(entity: entity!, insertInto: managedContext)
+        book.setValue(name, forKey: "bookName")
+        book.setValue(bookKey, forKey: "bookKey")
+        do {
+            try managedContext.save()
+            self.books.append(book)
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        }
+    }
+    
+    func getKeyForBook()  {
+        let defaultSession = URLSession(configuration: URLSessionConfiguration.default)
+        var dataTask: URLSessionDataTask?
+        if dataTask != nil {
+            dataTask?.cancel()
+        }
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        let url = NSURL(string: "http://obsly.com/api/v1/key")
+        dataTask = defaultSession.dataTask(with: url! as URL) {
+            data, response, error in
+            DispatchQueue.main.async    {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            }
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                    
+                    do{
+                        
+                        let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+                        
+                        if let result = json as? [String:AnyObject]   {
+                            let temporaryBookKey = (result["key"])!
+                            self.bookKey = temporaryBookKey as! String
+                            
+//                            let managedContext = DataController().managedObjectContext
+//                            let entity =  NSEntityDescription.entity(forEntityName: "Book", in:managedContext)
+//                            let book = NSManagedObject(entity: entity!, insertInto: managedContext)
+//                            book.setValue(temporaryBookKey, forKey: "bookKey")
+//                            do {
+//                                try managedContext.save()
+//                                self.books.append(book)
+//                            } catch let error as NSError  {
+//                                print("Could not save \(error), \(error.userInfo)")
+//                            }
+
+                            
+                        }
+                        else {
+                            print("ERROR: can't find bookKey")
+                        }
+                    }catch {
+                        print("Error with Json: \(error)")
+                    }
+                }
+            }
+        }
+        dataTask?.resume()
+    }
+    
+    @IBAction func cancelAction(_ sender: UIBarButtonItem) {
+        self.bookKey = ""
+        self.dismiss(animated: true, completion: nil)
     }
     
     func setupUI()  {

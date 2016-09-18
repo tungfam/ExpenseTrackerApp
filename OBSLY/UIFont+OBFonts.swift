@@ -10,15 +10,15 @@ import UIKit
 
 extension UIFont    {
     
-    class func applicationRegularFontOfSize(size: CGFloat) -> UIFont   {
+    class func applicationRegularFontOfSize(_ size: CGFloat) -> UIFont   {
         return UIFont(name: "SFUIText-Regular", size: size)!
     }
     
-    class func applicationMediumFontOfSize(size: CGFloat) -> UIFont   {
+    class func applicationMediumFontOfSize(_ size: CGFloat) -> UIFont   {
         return UIFont(name: "SFUIDisplay-Medium", size: size)!
     }
     
-    class func applicationBoldFontOfSize(size: CGFloat) -> UIFont   {
+    class func applicationBoldFontOfSize(_ size: CGFloat) -> UIFont   {
         return UIFont(name: "SFUIDisplay-Bold", size: size)!
     }
     

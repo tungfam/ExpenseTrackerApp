@@ -25,25 +25,25 @@ class InputDataTableViewCell: UITableViewCell, UITextFieldDelegate {
     func setupUI()  {
         // make separator line between cells to fill full width
         self.separatorInset = UIEdgeInsetsMake(0, 0, self.frame.size.width, 0)
-        if (self.respondsToSelector(Selector("preservesSuperviewLayoutMargins"))){
-            self.layoutMargins = UIEdgeInsetsZero
+        if (self.responds(to: #selector(getter: UIView.preservesSuperviewLayoutMargins))){
+            self.layoutMargins = UIEdgeInsets.zero
             self.preservesSuperviewLayoutMargins = false
         }
         
-        self.fieldValue.autocapitalizationType = .Sentences
+        self.fieldValue.autocapitalizationType = .sentences
 
         self.fieldTitle.font = UIFont.applicationMediumFontOfSize(20)
         self.fieldValue.font = UIFont.applicationRegularFontOfSize(20)
     }
     
     // add the space in the end of the text field when typing 'space'
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         if (textField == self.fieldValue) {
             let oldString = textField.text!
-            let newRange = oldString.startIndex.advancedBy(range.location)..<oldString.startIndex.advancedBy(range.location + range.length)
-            let newString = oldString.stringByReplacingCharactersInRange(newRange, withString: string)
-            textField.text = newString.stringByReplacingOccurrencesOfString(" ", withString: "\u{00a0}");
+            let newRange = oldString.characters.index(oldString.startIndex, offsetBy: range.location)..<oldString.characters.index(oldString.startIndex, offsetBy: range.location + range.length)
+            let newString = oldString.replacingCharacters(in: newRange, with: string)
+            textField.text = newString.replacingOccurrences(of: " ", with: "\u{00a0}");
             return false;
         } else {
             return true;
@@ -51,7 +51,7 @@ class InputDataTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
 
     // func that will dismiss keyboard on 'return' btn
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
