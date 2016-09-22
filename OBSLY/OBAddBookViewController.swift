@@ -117,19 +117,6 @@ class OBAddBookViewController: UIViewController, UITableViewDelegate, UITableVie
                         if let result = json as? [String:AnyObject]   {
                             let temporaryBookKey = (result["key"])!
                             self.bookKey = temporaryBookKey as! String
-                            
-//                            let managedContext = DataController().managedObjectContext
-//                            let entity =  NSEntityDescription.entity(forEntityName: "Book", in:managedContext)
-//                            let book = NSManagedObject(entity: entity!, insertInto: managedContext)
-//                            book.setValue(temporaryBookKey, forKey: "bookKey")
-//                            do {
-//                                try managedContext.save()
-//                                self.books.append(book)
-//                            } catch let error as NSError  {
-//                                print("Could not save \(error), \(error.userInfo)")
-//                            }
-
-                            
                         }
                         else {
                             print("ERROR: can't find bookKey")

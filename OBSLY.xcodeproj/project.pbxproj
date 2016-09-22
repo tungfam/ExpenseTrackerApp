@@ -13,6 +13,7 @@
 		A61128501D7D679200B6AC5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A611284E1D7D679200B6AC5A /* LaunchScreen.storyboard */; };
 		A61592811D8007FD00B8C814 /* OBMyBooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61592801D8007FD00B8C814 /* OBMyBooksViewController.swift */; };
 		A61592841D8008DE00B8C814 /* OBRequestWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61592831D8008DE00B8C814 /* OBRequestWrapper.swift */; };
+		A616D38B1D92C59000891166 /* OBTransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A616D38A1D92C59000891166 /* OBTransactionsViewController.swift */; };
 		A64CEC761D85ADCE00382E77 /* ShowDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64CEC751D85ADCE00382E77 /* ShowDataTableViewCell.swift */; };
 		A66950411D82C54500F6FA0E /* OBAddBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66950401D82C54500F6FA0E /* OBAddBookViewController.swift */; };
 		A66950451D82CB9F00F6FA0E /* InputDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66950431D82CB9F00F6FA0E /* InputDataTableViewCell.swift */; };
@@ -56,6 +57,7 @@
 		A61128511D7D679200B6AC5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A61592801D8007FD00B8C814 /* OBMyBooksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBMyBooksViewController.swift; sourceTree = "<group>"; };
 		A61592831D8008DE00B8C814 /* OBRequestWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBRequestWrapper.swift; sourceTree = "<group>"; };
+		A616D38A1D92C59000891166 /* OBTransactionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBTransactionsViewController.swift; sourceTree = "<group>"; };
 		A64CEC751D85ADCE00382E77 /* ShowDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowDataTableViewCell.swift; sourceTree = "<group>"; };
 		A66950401D82C54500F6FA0E /* OBAddBookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBAddBookViewController.swift; sourceTree = "<group>"; };
 		A66950431D82CB9F00F6FA0E /* InputDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputDataTableViewCell.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			children = (
 				A61592801D8007FD00B8C814 /* OBMyBooksViewController.swift */,
 				A66950401D82C54500F6FA0E /* OBAddBookViewController.swift */,
+				A616D38A1D92C59000891166 /* OBTransactionsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				A61592811D8007FD00B8C814 /* OBMyBooksViewController.swift in Sources */,
 				A6B403381D8D6966001D045A /* CoreDataModel.xcdatamodeld in Sources */,
 				A6B4033D1D8D6B2A001D045A /* Book+CoreDataProperties.swift in Sources */,
+				A616D38B1D92C59000891166 /* OBTransactionsViewController.swift in Sources */,
 				A61592841D8008DE00B8C814 /* OBRequestWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
