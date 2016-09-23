@@ -57,6 +57,7 @@ class OBAddBookViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
 //MARK: Private Methods
+    @available(iOS 10.0, *)
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
         let index = IndexPath.init(item: 0, section: 0)
         let bookNameCell = self.dataInputTableView.cellForRow(at: index)
@@ -78,8 +79,9 @@ class OBAddBookViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    @available(iOS 10.0, *)
     func saveBook(name: String) {
-        let managedContext = DataController().managedObjectContext
+        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let entity =  NSEntityDescription.entity(forEntityName: "Book", in:managedContext)
         let book = NSManagedObject(entity: entity!, insertInto: managedContext)
         book.setValue(name, forKey: "bookName")
@@ -117,6 +119,7 @@ class OBAddBookViewController: UIViewController, UITableViewDelegate, UITableVie
                         if let result = json as? [String:AnyObject]   {
                             let temporaryBookKey = (result["key"])!
                             self.bookKey = temporaryBookKey as! String
+                            print(temporaryBookKey)
                         }
                         else {
                             print("ERROR: can't find bookKey")

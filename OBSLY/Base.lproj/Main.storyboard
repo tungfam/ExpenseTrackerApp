@@ -94,30 +94,88 @@
                     <connections>
                         <outlet property="booksListTableView" destination="RB7-4z-AgQ" id="ybu-3Y-7Bx"/>
                         <segue destination="reJ-sD-hpf" kind="presentation" identifier="addBookManuallySegue" id="cxV-Rx-Baa"/>
-                        <segue destination="pgc-GG-Ak0" kind="show" identifier="openBookSegue" id="Epd-Dd-ROi"/>
+                        <segue destination="A59-oa-Ma2" kind="show" identifier="openBookSegue" id="riS-Ea-iyR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ftV-zx-d0l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1927" y="1017"/>
         </scene>
-        <!--Transactions View Controller-->
-        <scene sceneID="t20-n4-WVv">
+        <!--View Controller-->
+        <scene sceneID="PMQ-cC-mZb">
             <objects>
-                <viewController id="pgc-GG-Ak0" customClass="OBTransactionsViewController" customModule="OBSLY" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Sph-LV-5rK" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hrx-Sk-fDI"/>
-                        <viewControllerLayoutGuide type="bottom" id="zGh-8I-jh9"/>
+                        <viewControllerLayoutGuide type="top" id="9Ax-0z-mnL"/>
+                        <viewControllerLayoutGuide type="bottom" id="gKx-vQ-QcE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="KEF-Kw-zMK">
+                    <view key="view" contentMode="scaleToFill" id="egY-0D-lZ8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" selectedImage="labels_icon" id="3Nq-0D-hG2"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KLD-Sd-NKv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oKT-Em-ZvZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2806" y="1017"/>
+            <point key="canvasLocation" x="4220" y="877"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="F6r-yg-7rK">
+            <objects>
+                <viewController id="eyN-tk-2rd" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="X8E-iR-Apq"/>
+                        <viewControllerLayoutGuide type="bottom" id="c9e-6k-Uf4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rre-B7-dMI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" selectedImage="accounts_icon" id="HRY-r0-jae"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eno-hV-hRx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4220" y="1568"/>
+        </scene>
+        <!--Transactions-->
+        <scene sceneID="ZP1-uj-01C">
+            <objects>
+                <viewController id="am5-cw-mfv" customClass="OBTransactionsViewController" customModule="OBSLY" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="55m-eZ-fGn"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ivk-fl-9DH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vFB-pl-fdJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Transactions" image="transactions_icon" id="tfq-3B-uCT"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J1y-lD-OeM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4220" y="212"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="9Lw-bW-NZS">
+            <objects>
+                <tabBarController id="A59-oa-Ma2" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="C16-Qt-VKn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="am5-cw-mfv" kind="relationship" relationship="viewControllers" id="1la-j9-ipE"/>
+                        <segue destination="Sph-LV-5rK" kind="relationship" relationship="viewControllers" id="sK9-9Y-wDy"/>
+                        <segue destination="eyN-tk-2rd" kind="relationship" relationship="viewControllers" id="8Sp-ch-gdj"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K0i-ia-xDa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2774" y="1017"/>
         </scene>
         <!--Add Book View Controller-->
         <scene sceneID="hJ8-2d-NNv">
@@ -209,4 +267,9 @@
             <point key="canvasLocation" x="1926" y="1881"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="accounts_icon" width="57" height="57"/>
+        <image name="labels_icon" width="57" height="57"/>
+        <image name="transactions_icon" width="40" height="40"/>
+    </resources>
 </document>
