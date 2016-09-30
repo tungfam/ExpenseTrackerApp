@@ -121,9 +121,8 @@ class OBMyBooksViewController: UIViewController, UITableViewDelegate, UITableVie
 
 //MARK: Private Methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is OBTransactionsViewController{
-            // now set a var that points to that new viewcontroller so you can call the method correctly
-            let nextController = (segue.destination as! OBTransactionsViewController)
+        if segue.destination is OBTabBarViewController{
+            let nextController = (segue.destination as! OBTabBarViewController)
             nextController.getChosenIndexOfBook(index: chosenIndexPath)
         }
 
