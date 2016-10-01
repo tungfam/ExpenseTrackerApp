@@ -56,8 +56,8 @@ class OBTabBarViewController: UITabBarController {
         }
         
         let book = books[index]
-//        print(book.value(forKey: "bookName") as! String?)
-//        print(book.value(forKey: "bookKey") as! String?)        
+        print(book.value(forKey: "bookName") as! String?)
+        print(book.value(forKey: "bookKey") as! String?)        
     }
 
     

@@ -27,6 +27,15 @@ class OBAccountsViewController: UIViewController {
         self.performSegue(withIdentifier: self.addAccountSegueIdentifier, sender: nil)
     }
     
+//MARK: For segueing
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is OBAddAccountViewController{
+            let nextController = (segue.destination as! OBAddAccountViewController)
+            nextController.getChosenIndexOfBook(index: chosenBookIndex)
+        }
+        
+    }
+    
     internal func getChosenIndexOfBook(index: Int)  {
         chosenBookIndex = index
         print(chosenBookIndex)
@@ -47,6 +56,7 @@ class OBAccountsViewController: UIViewController {
         }
         
         let book = books[index]
+        print("accounts vc")
         print(book.value(forKey: "bookName") as! String?)
         print(book.value(forKey: "bookKey") as! String?)
     }

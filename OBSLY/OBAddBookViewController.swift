@@ -34,10 +34,6 @@ class OBAddBookViewController: UIViewController, UITableViewDelegate, UITableVie
         
         getKeyForBook()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
 
 //MARK: UITableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int {

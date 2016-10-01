@@ -18,7 +18,7 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgi-ff-T3Y">
                         <constraints>
-                            <constraint firstAttribute="width" constant="80" id="GXX-SH-dEz"/>
+                            <constraint firstAttribute="width" constant="100" id="GXX-SH-dEz"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -62,9 +62,9 @@
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
-                        <exclude reference="TRr-xh-9lE"/>
                         <exclude reference="iUs-24-HhZ"/>
                         <exclude reference="qMF-EI-Zdr"/>
+                        <exclude reference="TRr-xh-9lE"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
