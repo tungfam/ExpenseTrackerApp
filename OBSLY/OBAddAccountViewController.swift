@@ -18,12 +18,14 @@ class OBAddAccountViewController: UIViewController, UITableViewDelegate, UITable
     let fieldsToInput = 4
     let inputSections = 1
     let currencyRowIndexPath = IndexPath.init(row: 1, section: 0)
-    let inputFieldsArray: Array = ["Name", "Currency", "Amount", "Sign"]
+    let inputFieldsArray: Array = ["Name*", "Currency*", "Amount", "Sign"]
     let currencyArray = ["USD", "UAH", "EUR"]
     var pickerView = UIPickerView()
     var selectedCurrency = ""
     
-    var chosenBookIndex = 0
+    var dictWithAccountData = [String: AnyObject]()
+    let paramsForPostAccount = ["key", "name", "currency", "start_amt", "sign"]
+    
     var books = [NSManagedObject]()
     
 //MARK: UIViewController lifecycle
@@ -35,7 +37,15 @@ class OBAddAccountViewController: UIViewController, UITableViewDelegate, UITable
         pickerView.delegate = self
         pickerView.dataSource = self
         
-        // Do any additional setup after loading the view.
+        // adding book key param to dict
+        
+        let defaults = UserDefaults.standard
+        var chosenBookKey = ""
+        if let chosenBookKeyFromDefaults = defaults.string(forKey: "chosenBookKey") {
+            chosenBookKey = chosenBookKeyFromDefaults
+        }
+        let keyParamDict = paramsForPostAccount[0]
+        dictWithAccountData[keyParamDict] = chosenBookKey as AnyObject?
     }
 
 //MARK: UIPickerViewDataSource
@@ -68,12 +78,23 @@ class OBAddAccountViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         tableView.register(UINib(nibName: InputDataTableViewCellIdentifier, bundle: nil), forCellReuseIdentifier: InputDataCellIdentifier)
         let cell = tableView.dequeueReusableCell(withIdentifier: InputDataCellIdentifier, for: indexPath) as! InputDataTableViewCell
-        if (indexPath.row == 1) {   //currency row
+        switch indexPath.row {
+        case 1:
             let toolBar = self.returnToolBar()
             cell.fieldValue.inputAccessoryView = toolBar
             cell.fieldValue.inputView = pickerView
             cell.fieldValue.text = selectedCurrency
+            break
+        case 2:
+            cell.fieldValue.keyboardType = UIKeyboardType.decimalPad
+            break
+        case 3:
+            cell.fieldValue.keyboardType = UIKeyboardType.numbersAndPunctuation
+            break
+        default:
+            break
         }
+        
         cell.fieldTitle.text = inputFieldsArray[indexPath.row]
         
         return cell
@@ -85,32 +106,170 @@ class OBAddAccountViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
+        if showAlertOfWrongFormat() {
+            for i in (0..<4)    {
+                let index = IndexPath.init(item: i, section: 0)
+                let cell = self.accountDataInputTableView.cellForRow(at: index)
+                for view: UIView in cell!.contentView.subviews {
+                    if (view is UITextField) {
+                        let inputField = (view as! UITextField)
+                        // adding value to dictionary
+                        if i == 2    {
+                            let amountValue : Float = NSString(string: inputField.text!).floatValue
+                            let paramNameInDict = paramsForPostAccount[i+1]
+                            dictWithAccountData[paramNameInDict] = amountValue as AnyObject?
+                        } else  {
+                            let valueToPass = inputField.text
+                            let paramNameInDict = paramsForPostAccount[i+1]
+                            dictWithAccountData[paramNameInDict] = valueToPass as AnyObject?
+                        }
+                    }
+                }
+            }
+            postAccount()
+        }
+        else {
+            // wrong value format in input fields
+        }
+    }
     
+    func postAccount()  {
+        print(dictWithAccountData)
+        let defaults = UserDefaults.standard
+        var chosenBookKey = ""
+        if let chosenBookKeyFromDefaults = defaults.string(forKey: "chosenBookKey") {
+            chosenBookKey = chosenBookKeyFromDefaults
+        }
+        let url = NSURL(string: "http://obsly.com/api/v1/\(chosenBookKey)/accounts")
+        print(url)
+        let session = URLSession.shared
+        let request = NSMutableURLRequest(url: url! as URL)
+        request.httpMethod = "POST" //set http method as POST
+        do {
+            let body = try JSONSerialization.data(withJSONObject: dictWithAccountData, options: JSONSerialization.WritingOptions.prettyPrinted)  // pass dictionary to nsdata object and set it as request body
+            request.httpBody = body
+        } catch let error as NSError {
+            print("json error: \(error.localizedDescription)")
+        }
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        //create dataTask using the session object to send data to the server
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
+            print("Response: \(response)")
+            print("Data: \(data)")
+            print("Error: \(error)")
+            if(error != nil) {
+                print("Server Error: \(error!.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.presentErrorAlert(title: "Error", error: error as! NSError)
+                }
+            } else    {
+                do {
+                    let jsonResponse = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                    print(jsonResponse)
+                    if (jsonResponse?["error"]) != nil  { // if data contains error
+                        DispatchQueue.main.async {
+                            self.presentErrorAlertWithMessage(title: "Error", message: "Account not saved: \(jsonResponse?["error"])")
+                        }                        
+                    } else    {
+                        self.dismiss(animated: true, completion: nil) // leaving addAccount VC
+                    }
+                } catch let error as NSError {
+                    self.presentErrorAlert(title: "Error", error: error)
+                    print("json error: \(error.localizedDescription)")
+                }
+            }
+        })
+        task.resume()
     }
     
     internal func getChosenIndexOfBook(index: Int)  {
-        chosenBookIndex = index
-        print(chosenBookIndex)
-        
-        // getting books from coredata
-        if #available(iOS 10.0, *) {
-            let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-            let fetchRequest: NSFetchRequest<Book> = Book.fetchRequest()
-            do {
-                let results =
-                    try managedContext.fetch(fetchRequest)
-                books = results
-            } catch let error as NSError {
-                print("Could not fetch \(error), \(error.userInfo)")
+//        chosenBookIndex = index
+//        print(chosenBookIndex)
+//        
+//        // getting books from coredata
+//        if #available(iOS 10.0, *) {
+//            let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//            let fetchRequest: NSFetchRequest<Book> = Book.fetchRequest()
+//            do {
+//                let results =
+//                    try managedContext.fetch(fetchRequest)
+//                books = results
+//            } catch let error as NSError {
+//                print("Could not fetch \(error), \(error.userInfo)")
+//            }
+//        } else {
+//            print("error: old iOS version")
+//        }
+//        
+//        let book = books[index]
+////        chosenBookKey = book.value(forKey: "bookKey") as! String
+//        print("add account vc")
+//        print(book.value(forKey: "bookName") as! String?)
+//        print(book.value(forKey: "bookKey") as! String?)
+    }
+
+    func setupUI()  {
+        accountDataInputTableView.tableFooterView = UIView() // remove unused cell in table view
+        self.navigationController!.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.applicationBoldFontOfSize(20)]
+    }
+    
+    
+//MARK: Assisting Methods
+    
+    func showAlertOfWrongFormat() -> Bool   {
+        for i in (0..<4)    {
+            let index = IndexPath.init(item: i, section: 0)
+            let cell = self.accountDataInputTableView.cellForRow(at: index)
+            for view: UIView in cell!.contentView.subviews {
+                if (view is UITextField) {
+                    let inputField = (view as! UITextField)
+                    
+                    if !checkFieldsForCorrectFormat(text: inputField.text!, index: i) {
+                        return false
+                    }
+                }
             }
-        } else {
-            print("error: old iOS version")
+        }
+        return true
+    }
+    
+    func checkFieldsForCorrectFormat(text: String, index: Int) -> Bool   {
+        var result = true
+        var errorMsg = ""
+        
+        if ((index == 0 || index == 1) && text == "")   {
+            errorMsg = "Please fill up the empty field(s)"
+            result = false
+        }
+        if index == 1  { // currency row
+            if text.characters.count > 3    {
+                errorMsg = "Please enter valid currency (not more than 3 characters e.g. USD)"
+                result = false
+            }
+        }   else if index == 2   { // amount row
+            if !text.isAmountFormat {
+                errorMsg = "Please enter valid amount (number in format: 123.53)"
+                result = false
+            }
+        }
+        else if index == 3    { // sign row
+            if text.characters.count > 1    {
+                errorMsg = "Please enter valid sign (nore more than 1 character e.g. $)"
+                result = false
+            }
         }
         
-        let book = books[index]
-        print("add account vc")
-        print(book.value(forKey: "bookName") as! String?)
-        print(book.value(forKey: "bookKey") as! String?)
+        if !result  {
+            let alert = UIAlertController(title: "Oops!", message: errorMsg, preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(defaultAction)
+            present(alert, animated: true, completion: nil)
+            
+        }
+        return result
     }
 
     func returnToolBar() -> UIToolbar  {
@@ -129,7 +288,7 @@ class OBAddAccountViewController: UIViewController, UITableViewDelegate, UITable
         
         return toolBar
     }
-
+    
     func reloadCurrencyTextFieldRow()   {
         let cell = accountDataInputTableView.dequeueReusableCell(withIdentifier: InputDataCellIdentifier, for: IndexPath.init(row: 1, section: 0)) as! InputDataTableViewCell
         cell.fieldValue.resignFirstResponder()

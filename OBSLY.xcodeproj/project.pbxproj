@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A610F33C1DA6E27A0060149B /* String+Checking.swift in Sources */ = {isa = PBXBuildFile; fileRef = A610F33B1DA6E27A0060149B /* String+Checking.swift */; };
+		A610F33E1DA6EE2E0060149B /* UIAlertController+PresentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A610F33D1DA6EE2E0060149B /* UIAlertController+PresentError.swift */; };
+		A610F3401DA6F7DF0060149B /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A610F33F1DA6F7DF0060149B /* UIViewController+Alert.swift */; };
+		A610F3421DA7077F0060149B /* OBAccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A610F3411DA7077F0060149B /* OBAccountTableViewCell.swift */; };
 		A61128461D7D679200B6AC5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61128451D7D679200B6AC5A /* AppDelegate.swift */; };
 		A611284B1D7D679200B6AC5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A61128491D7D679200B6AC5A /* Main.storyboard */; };
 		A611284D1D7D679200B6AC5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A611284C1D7D679200B6AC5A /* Assets.xcassets */; };
@@ -53,6 +57,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A610F33B1DA6E27A0060149B /* String+Checking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Checking.swift"; sourceTree = "<group>"; };
+		A610F33D1DA6EE2E0060149B /* UIAlertController+PresentError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+PresentError.swift"; sourceTree = "<group>"; };
+		A610F33F1DA6F7DF0060149B /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		A610F3411DA7077F0060149B /* OBAccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBAccountTableViewCell.swift; sourceTree = "<group>"; };
 		A61128421D7D679200B6AC5A /* OBSLY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OBSLY.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A61128451D7D679200B6AC5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A611284A1D7D679200B6AC5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -236,6 +244,7 @@
 		A66950421D82CB5300F6FA0E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				A610F3411DA7077F0060149B /* OBAccountTableViewCell.swift */,
 				A64CEC751D85ADCE00382E77 /* ShowDataTableViewCell.swift */,
 				A66950431D82CB9F00F6FA0E /* InputDataTableViewCell.swift */,
 				A66950441D82CB9F00F6FA0E /* InputDataTableViewCell.xib */,
@@ -247,6 +256,9 @@
 			isa = PBXGroup;
 			children = (
 				A66951AA1D8488E300F6FA0E /* UIFont+OBFonts.swift */,
+				A610F33B1DA6E27A0060149B /* String+Checking.swift */,
+				A610F33D1DA6EE2E0060149B /* UIAlertController+PresentError.swift */,
+				A610F33F1DA6F7DF0060149B /* UIViewController+Alert.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -403,6 +415,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A610F33C1DA6E27A0060149B /* String+Checking.swift in Sources */,
 				A66951AB1D8488E300F6FA0E /* UIFont+OBFonts.swift in Sources */,
 				A61A16DD1D9A632D00996842 /* OBTabBarViewController.swift in Sources */,
 				A61A16E61D9A6B1100996842 /* OBAddAccountViewController.swift in Sources */,
@@ -410,13 +423,16 @@
 				A66950451D82CB9F00F6FA0E /* InputDataTableViewCell.swift in Sources */,
 				A66950411D82C54500F6FA0E /* OBAddBookViewController.swift in Sources */,
 				A61A16DF1D9A693800996842 /* OBLabelsViewController.swift in Sources */,
+				A610F3421DA7077F0060149B /* OBAccountTableViewCell.swift in Sources */,
 				A64CEC761D85ADCE00382E77 /* ShowDataTableViewCell.swift in Sources */,
 				A6B403431D8D7146001D045A /* DataController.swift in Sources */,
 				A61128461D7D679200B6AC5A /* AppDelegate.swift in Sources */,
+				A610F33E1DA6EE2E0060149B /* UIAlertController+PresentError.swift in Sources */,
 				A61592811D8007FD00B8C814 /* OBMyBooksViewController.swift in Sources */,
 				A6B403381D8D6966001D045A /* CoreDataModel.xcdatamodeld in Sources */,
 				A6B4033D1D8D6B2A001D045A /* Book+CoreDataProperties.swift in Sources */,
 				A616D38B1D92C59000891166 /* OBTransactionsViewController.swift in Sources */,
+				A610F3401DA6F7DF0060149B /* UIViewController+Alert.swift in Sources */,
 				A61592841D8008DE00B8C814 /* OBRequestWrapper.swift in Sources */,
 				A65E039C1D986AA200CFB8FA /* OBAccountsViewController.swift in Sources */,
 			);

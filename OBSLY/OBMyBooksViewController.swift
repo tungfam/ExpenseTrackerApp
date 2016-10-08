@@ -26,6 +26,7 @@ class OBMyBooksViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         
         setupUI()
+        booksListTableView.delegate = self
         navigationItem.rightBarButtonItem = editButtonItem
         
     }

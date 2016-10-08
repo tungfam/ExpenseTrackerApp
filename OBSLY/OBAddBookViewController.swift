@@ -47,7 +47,7 @@ class OBAddBookViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         tableView.register(UINib(nibName: InputDataTableViewCellIdentifier, bundle: nil), forCellReuseIdentifier: InputDataCellIdentifier)
         let cell = tableView.dequeueReusableCell(withIdentifier: InputDataCellIdentifier, for: indexPath) as! InputDataTableViewCell
-        cell.fieldTitle.text = "Name"
+        cell.fieldTitle.text = "Name*"
         
         return cell
     }
@@ -67,6 +67,7 @@ class OBAddBookViewController: UIViewController, UITableViewDelegate, UITableVie
                     alert.addAction(defaultAction)
                     present(alert, animated: true, completion: nil)
                 } else {
+                    print(bookNameField.text)
                     let bookNameFromField = bookNameField.text!
                     self.saveBook(name: bookNameFromField)
                     self.dismiss(animated: true, completion: nil)
