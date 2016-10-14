@@ -41,6 +41,9 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
     var selectedCurrency = ""
     let currencyRowIndexPath = IndexPath.init(row: 4, section: 0)
     let dateRowIndexPath = IndexPath.init(row: 3, section: 0)
+    let defaults = UserDefaults.standard
+    let paramsForPostTransaction = ["amt", "account_id", "label_list", "datetime_on", "currency", "rate", "note", "key"]
+    var dictWithTransactionData = [String: AnyObject]()
 
 //MARK: Lifecycle
     override func viewDidLoad() {
@@ -52,9 +55,10 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
         currencyPickerView.dataSource = self
         
         // we set empty chosen account so that when user chooses the account we show chosen data
-        let defaults = UserDefaults.standard
         defaults.set("Choose account", forKey: "chosenAccountName")
         defaults.set(nil, forKey: "chosenAccountID")
+        let testLabelsArray: [String] = ["test label 1", "test label 2"]
+        defaults.setValue(testLabelsArray, forKey: "chosenLabelsArray")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,7 +79,6 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
         if let cellID = OBTableRow(rawValue: indexPath.row)   {
             if cellID == .account   {
                 let accountCell = tableView.dequeueReusableCell(withIdentifier: accountCellIdentifier, for: indexPath) as! OBChooseAccountCellTableViewCell
-                let defaults = UserDefaults.standard
                 let accountName = defaults.string(forKey: "chosenAccountName")
                 print(defaults.string(forKey: "chosenAccountID"))
                 accountCell.chooseAccButton.setTitle(accountName, for: .normal)
@@ -83,7 +86,9 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
                 cell = accountCell
             } else if cellID == .labels {
                 let labelsCell = tableView.dequeueReusableCell(withIdentifier: chooseLabelsCellIdentifier, for: indexPath) as! OBChooseLabelsCell
-
+                let labelsArray = defaults.array(forKey: "chosenLabelsArray") as! [String]
+                let labelsString = labelsArray.joined(separator: ", ")
+                labelsCell.chooseLabelButton.setTitle(labelsString, for: .normal)
                 
                 cell = labelsCell
             } else  {
@@ -182,14 +187,122 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
         cell.fieldValue.resignFirstResponder()
         transactionsTableView.reloadRows(at: [dateRowIndexPath], with: .automatic)
     }
+    
+    func postTransaction()   {
+        var chosenBookKey = ""
+        if let chosenBookKeyFromDefaults = defaults.string(forKey: "chosenBookKey") {
+            chosenBookKey = chosenBookKeyFromDefaults
+        }
+        let keyParamInDict = paramsForPostTransaction[7] // adding book key to the dictionary
+        dictWithTransactionData[keyParamInDict] = chosenBookKey as AnyObject?
+        print(dictWithTransactionData)
+        
+        let url = NSURL(string: "http://obsly.com/api/v1/\(chosenBookKey)/transactions")
+        print(url)
+        let session = URLSession.shared
+        let request = NSMutableURLRequest(url: url! as URL)
+        request.httpMethod = "POST" //set http method as POST
+        do {
+            let body = try JSONSerialization.data(withJSONObject: dictWithTransactionData, options: JSONSerialization.WritingOptions.prettyPrinted)  // pass dictionary to nsdata object and set it as request body
+            request.httpBody = body
+        } catch let error as NSError {
+            print("json error: \(error.localizedDescription)")
+            self.presentErrorAlert(title: "Error", error: error)
+        }
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        //create dataTask using the session object to send data to the server
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
+            print("Response: \(response)")
+            print("Data: \(data)")
+            print("Error: \(error)")
+            if(error != nil) {
+                print("Server Error: \(error!.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.presentErrorAlert(title: "Error", error: error as! NSError)
+                }
+            } else    {
+                do {
+                    let jsonResponse = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                    print(jsonResponse)
+                    if (jsonResponse?["error"]) != nil  { // if data contains error
+                        DispatchQueue.main.async {
+                            self.presentErrorAlertWithMessage(title: "Error", message: "Account not saved: \(jsonResponse?["error"])")
+                        }
+                    } else    {
+                        self.dismiss(animated: true, completion: nil) // leaving addTransaction VC
+                    }
+                } catch let error as NSError {
+                    self.presentErrorAlert(title: "Error", error: error)
+                    print("json error: \(error.localizedDescription)")
+                }
+            }
+        })
+        task.resume()
+    }
 
     
-//MARK: Actions
+//MARK: - Actions
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
+        if showAlertOfWrongFormat() {
+            for i in (0..<inputFieldsArray.count)    {
+                let index = IndexPath.init(item: i, section: 0)
+                
+                if i == OBTableRow.account.rawValue    {
+                    let accountID = defaults.string(forKey: "chosenAccountID")
+                    let paramNameInDict = paramsForPostTransaction[i]
+                    dictWithTransactionData[paramNameInDict] = accountID as AnyObject?
+                }
+                else if i == OBTableRow.labels.rawValue {
+                    let labelsArray = defaults.array(forKey: "chosenLabelsArray")
+                    let paramNameInDict = paramsForPostTransaction[i]
+                    let finalArray = NSMutableArray()
+                    finalArray.addObjects(from: labelsArray!)
+                    print(labelsArray)
+                    dictWithTransactionData[paramNameInDict] = finalArray as AnyObject?
+                    print(dictWithTransactionData)
+                }
+                
+                let cell = self.transactionsTableView.cellForRow(at: index)
+                for view: UIView in cell!.contentView.subviews {
+                    if (view is UITextField) {
+                        let inputField = (view as! UITextField)
+                        // adding value to dictionary
+                        if i == OBTableRow.amount.rawValue || i == OBTableRow.rate.rawValue    {
+                            let numberValue : Float = NSString(string: inputField.text!).floatValue
+                            let paramNameInDict = paramsForPostTransaction[i]
+                            dictWithTransactionData[paramNameInDict] = numberValue as AnyObject?
+                        }
+                        else if i == OBTableRow.date.rawValue   {
+                            let paramNameInDict = paramsForPostTransaction[i]
+                            let date = self.datePickerView.date
+                            let formatter = ISO8601DateFormatter()
+//                            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+//                            formatter.timeZone = TimeZone(secondsFromGMT: 0)
+//                            formatter.locale = Locale(identifier: "en_US_POSIX")
+                            let timeString = formatter.string(from: date)
+                            dictWithTransactionData[paramNameInDict] = timeString as AnyObject?
+                        }
+                        else  { // currency and note 
+                            let valueToPass = inputField.text
+                            let paramNameInDict = paramsForPostTransaction[i]
+                            dictWithTransactionData[paramNameInDict] = valueToPass as AnyObject?
+                        }
+                    }
+                }
+            }
+            postTransaction()
+        }
+        else {
+            // wrong value format in input fields
+        }
+
     }
     
     @IBAction func openChooseAccount(_ sender: UIButton) {
@@ -198,6 +311,68 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBAction func openChooseLabels(_ sender: UIButton) {
     }
+    
+//MARK: - Assisting Methods
+    
+    func showAlertOfWrongFormat() -> Bool   {
+        for i in (0..<inputFieldsArray.count)    {
+            let index = IndexPath.init(item: i, section: 0)
+            let cell = self.transactionsTableView.cellForRow(at: index)
+            for view: UIView in cell!.contentView.subviews {
+                if (view is UITextField) {
+                    let inputField = (view as! UITextField)
+                    if !checkFieldsForCorrectFormat(text: inputField.text!, index: i) {
+                        return false
+                    }
+                }
+            }
+        }
+        return true
+    }
+    
+    func checkFieldsForCorrectFormat(text: String, index: Int) -> Bool   {
+        var result = true
+        var errorMsg = ""
+        let accountID = defaults.string(forKey: "chosenAccountID")
+        let labelsArray = defaults.array(forKey: "chosenLabelsArray")
+        if (index == OBTableRow.amount.rawValue && text == "")   {
+            errorMsg = "Please fill up the required field(s). Required fields marked with \"*\"."
+            result = false
+        }
+        if (accountID == nil)  {
+            errorMsg = "Please choose account. Account is required field."
+            result = false
+        }
+        else if (labelsArray == nil) {
+            errorMsg = "Please choose label(s). Label(s) is required field."
+            result = false
+        }
+        else if (index == OBTableRow.amount.rawValue) && (!text.isAmountFormat)  {
+            errorMsg = "Please enter valid amount (number in format: 123.53)."
+            result = false
+        }
+        else if (index == OBTableRow.currency.rawValue) && (text.characters.count > 3)  {
+            errorMsg = "Please enter valid currency (not more than 3 characters e.g. USD)."
+            result = false
+        }
+        else if index == OBTableRow.rate.rawValue &&
+                text.characters.count > 1  &&
+                !text.isAmountFormat
+        {
+                errorMsg = "Please enter valuid rate (rate in format: 123.53)."
+                result = false
+        }
+        
+        if !result  {
+            let alert = UIAlertController(title: "Oops!", message: errorMsg, preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(defaultAction)
+            present(alert, animated: true, completion: nil)
+            
+        }
+        return result
+    }
+
     
 //MARK: UI Stuff
     func setupUI()  {

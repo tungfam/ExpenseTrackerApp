@@ -97,18 +97,18 @@ class OBAddAccountViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
         if showAlertOfWrongFormat() {
-            for i in (0..<4)    {
+            for i in (0..<inputFieldsArray.count)    {
                 let index = IndexPath.init(item: i, section: 0)
                 let cell = self.accountDataInputTableView.cellForRow(at: index)
                 for view: UIView in cell!.contentView.subviews {
                     if (view is UITextField) {
                         let inputField = (view as! UITextField)
                         // adding value to dictionary
-                        if i == 2    {
+                        if i == 2    { // amount row
                             let amountValue : Float = NSString(string: inputField.text!).floatValue
                             let paramNameInDict = paramsForPostAccount[i]
                             dictWithAccountData[paramNameInDict] = amountValue as AnyObject?
-                        } else  {
+                        } else  { // other rows
                             let valueToPass = inputField.text
                             let paramNameInDict = paramsForPostAccount[i]
                             dictWithAccountData[paramNameInDict] = valueToPass as AnyObject?
@@ -130,7 +130,7 @@ class OBAddAccountViewController: UIViewController, UITableViewDelegate, UITable
         if let chosenBookKeyFromDefaults = defaults.string(forKey: "chosenBookKey") {
             chosenBookKey = chosenBookKeyFromDefaults
         }
-        let keyParamDict = paramsForPostAccount[4]
+        let keyParamDict = paramsForPostAccount[4] // adding book key to the dictionary
         dictWithAccountData[keyParamDict] = chosenBookKey as AnyObject?
         print(dictWithAccountData)
         let url = NSURL(string: "http://obsly.com/api/v1/\(chosenBookKey)/accounts")
@@ -143,6 +143,7 @@ class OBAddAccountViewController: UIViewController, UITableViewDelegate, UITable
             request.httpBody = body
         } catch let error as NSError {
             print("json error: \(error.localizedDescription)")
+            self.presentErrorAlert(title: "Error", error: error)
         }
         
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -187,7 +188,7 @@ class OBAddAccountViewController: UIViewController, UITableViewDelegate, UITable
 //MARK: Assisting Methods
     
     func showAlertOfWrongFormat() -> Bool   {
-        for i in (0..<4)    {
+        for i in (0..<inputFieldsArray.count)    {
             let index = IndexPath.init(item: i, section: 0)
             let cell = self.accountDataInputTableView.cellForRow(at: index)
             for view: UIView in cell!.contentView.subviews {
@@ -208,23 +209,24 @@ class OBAddAccountViewController: UIViewController, UITableViewDelegate, UITable
         var errorMsg = ""
         
         if ((index == 0 || index == 1) && text == "")   {
-            errorMsg = "Please fill up the empty field(s)"
+            errorMsg = "Please fill up the required field(s). Required fields marked with \"*\"."
             result = false
         }
         if index == 1  { // currency row
             if text.characters.count > 3    {
-                errorMsg = "Please enter valid currency (not more than 3 characters e.g. USD)"
+                errorMsg = "Please enter valid currency (not more than 3 characters e.g. USD)."
                 result = false
             }
-        }   else if index == 2   { // amount row
+        }
+        else if index == 2   { // amount row
             if !text.isAmountFormat {
-                errorMsg = "Please enter valid amount (number in format: 123.53)"
+                errorMsg = "Please enter valid amount (number in format: 123.53)."
                 result = false
             }
         }
         else if index == 3    { // sign row
             if text.characters.count > 1    {
-                errorMsg = "Please enter valid sign (nore more than 1 character e.g. $)"
+                errorMsg = "Please enter valid sign (nore more than 1 character e.g. $)."
                 result = false
             }
         }
