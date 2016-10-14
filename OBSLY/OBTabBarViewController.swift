@@ -19,19 +19,20 @@ class OBTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        let nextControllerOne = OBTransactionsViewController()
-//        nextControllerOne.getChosenIndexOfBook(index: chosenBookIndex)
-//        let nextControllerTwo = OBAccountsViewController()
-//        nextControllerTwo.getChosenIndexOfBook(index: chosenBookIndex)
-//        let nextControllerThree = OBLabelsViewController()
-//        nextControllerThree.getChosenIndexOfBook(index: chosenBookIndex)
+        let defaults = UserDefaults.standard
+        var chosenBookName = ""
+        if let chosenBookKeyFromDefaults = defaults.string(forKey: "chosenBookName") {
+            chosenBookName = chosenBookKeyFromDefaults
+        }
+        self.navigationItem.title = chosenBookName
+        self.navigationController!.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.applicationBoldFontOfSize(20)]
     }
     
 //MARK: For segueing
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is OBTransactionsViewController{
             let nextController = (segue.destination as! OBTransactionsViewController)
-//            nextController.getChosenIndexOfBook(index: chosenBookIndex)
+
         }
         
     }
@@ -56,9 +57,10 @@ class OBTabBarViewController: UITabBarController {
         }
         let book = books[index]
         let chosenBookKey = book.value(forKey: "bookKey") as! String?
+        let chosenBookName = book.value(forKey: "bookName") as! String?
         let defaults = UserDefaults.standard
         defaults.set(chosenBookKey, forKey: "chosenBookKey")
-        
+        defaults.set(chosenBookName, forKey: "chosenBookName")
         print(book.value(forKey: "bookName") as! String?)
         print(book.value(forKey: "bookKey") as! String?)        
     }

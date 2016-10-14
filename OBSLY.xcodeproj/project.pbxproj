@@ -15,6 +15,7 @@
 		A611284B1D7D679200B6AC5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A61128491D7D679200B6AC5A /* Main.storyboard */; };
 		A611284D1D7D679200B6AC5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A611284C1D7D679200B6AC5A /* Assets.xcassets */; };
 		A61128501D7D679200B6AC5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A611284E1D7D679200B6AC5A /* LaunchScreen.storyboard */; };
+		A612C1E91DAB7E8C00BACF31 /* OBAddTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A612C1E81DAB7E8C00BACF31 /* OBAddTransactionViewController.swift */; };
 		A61592811D8007FD00B8C814 /* OBMyBooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61592801D8007FD00B8C814 /* OBMyBooksViewController.swift */; };
 		A61592841D8008DE00B8C814 /* OBRequestWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61592831D8008DE00B8C814 /* OBRequestWrapper.swift */; };
 		A616D38B1D92C59000891166 /* OBTransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A616D38A1D92C59000891166 /* OBTransactionsViewController.swift */; };
@@ -49,6 +50,9 @@
 		A66951A81D8486A200F6FA0E /* SFUIText-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A669517E1D8486A200F6FA0E /* SFUIText-Semibold.ttf */; };
 		A66951A91D8486A200F6FA0E /* SFUIText-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A669517F1D8486A200F6FA0E /* SFUIText-SemiboldItalic.ttf */; };
 		A66951AB1D8488E300F6FA0E /* UIFont+OBFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66951AA1D8488E300F6FA0E /* UIFont+OBFonts.swift */; };
+		A675A9AB1DAFB7D100C8E433 /* OBChooseAccountCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A675A9AA1DAFB7D100C8E433 /* OBChooseAccountCellTableViewCell.swift */; };
+		A675A9AD1DAFB99100C8E433 /* OBChooseLabelsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A675A9AC1DAFB99100C8E433 /* OBChooseLabelsCell.swift */; };
+		A675A9B11DB01AF200C8E433 /* OBChooseAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A675A9B01DB01AF200C8E433 /* OBChooseAccountTableViewController.swift */; };
 		A6B403381D8D6966001D045A /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A6B403361D8D6966001D045A /* CoreDataModel.xcdatamodeld */; };
 		A6B4033C1D8D6B2A001D045A /* Book+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B4033A1D8D6B2A001D045A /* Book+CoreDataClass.swift */; };
 		A6B4033D1D8D6B2A001D045A /* Book+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B4033B1D8D6B2A001D045A /* Book+CoreDataProperties.swift */; };
@@ -67,6 +71,7 @@
 		A611284C1D7D679200B6AC5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A611284F1D7D679200B6AC5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A61128511D7D679200B6AC5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A612C1E81DAB7E8C00BACF31 /* OBAddTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBAddTransactionViewController.swift; sourceTree = "<group>"; };
 		A61592801D8007FD00B8C814 /* OBMyBooksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBMyBooksViewController.swift; sourceTree = "<group>"; };
 		A61592831D8008DE00B8C814 /* OBRequestWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBRequestWrapper.swift; sourceTree = "<group>"; };
 		A616D38A1D92C59000891166 /* OBTransactionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBTransactionsViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +105,9 @@
 		A669517E1D8486A200F6FA0E /* SFUIText-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-Semibold.ttf"; sourceTree = "<group>"; };
 		A669517F1D8486A200F6FA0E /* SFUIText-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 		A66951AA1D8488E300F6FA0E /* UIFont+OBFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+OBFonts.swift"; sourceTree = "<group>"; };
+		A675A9AA1DAFB7D100C8E433 /* OBChooseAccountCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBChooseAccountCellTableViewCell.swift; sourceTree = "<group>"; };
+		A675A9AC1DAFB99100C8E433 /* OBChooseLabelsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBChooseLabelsCell.swift; sourceTree = "<group>"; };
+		A675A9B01DB01AF200C8E433 /* OBChooseAccountTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBChooseAccountTableViewController.swift; sourceTree = "<group>"; };
 		A6B403371D8D6966001D045A /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		A6B4033A1D8D6B2A001D045A /* Book+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Book+CoreDataClass.swift"; path = "../Book+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A6B4033B1D8D6B2A001D045A /* Book+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Book+CoreDataProperties.swift"; path = "../Book+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -220,6 +228,8 @@
 			isa = PBXGroup;
 			children = (
 				A616D38A1D92C59000891166 /* OBTransactionsViewController.swift */,
+				A612C1E81DAB7E8C00BACF31 /* OBAddTransactionViewController.swift */,
+				A675A9B01DB01AF200C8E433 /* OBChooseAccountTableViewController.swift */,
 			);
 			name = Transactions;
 			sourceTree = "<group>";
@@ -244,6 +254,8 @@
 		A66950421D82CB5300F6FA0E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				A675A9AA1DAFB7D100C8E433 /* OBChooseAccountCellTableViewCell.swift */,
+				A675A9AC1DAFB99100C8E433 /* OBChooseLabelsCell.swift */,
 				A610F3411DA7077F0060149B /* OBAccountTableViewCell.swift */,
 				A64CEC751D85ADCE00382E77 /* ShowDataTableViewCell.swift */,
 				A66950431D82CB9F00F6FA0E /* InputDataTableViewCell.swift */,
@@ -420,7 +432,11 @@
 				A61A16DD1D9A632D00996842 /* OBTabBarViewController.swift in Sources */,
 				A61A16E61D9A6B1100996842 /* OBAddAccountViewController.swift in Sources */,
 				A6B4033C1D8D6B2A001D045A /* Book+CoreDataClass.swift in Sources */,
+				A675A9AB1DAFB7D100C8E433 /* OBChooseAccountCellTableViewCell.swift in Sources */,
+				A612C1E91DAB7E8C00BACF31 /* OBAddTransactionViewController.swift in Sources */,
+				A675A9AD1DAFB99100C8E433 /* OBChooseLabelsCell.swift in Sources */,
 				A66950451D82CB9F00F6FA0E /* InputDataTableViewCell.swift in Sources */,
+				A675A9B11DB01AF200C8E433 /* OBChooseAccountTableViewController.swift in Sources */,
 				A66950411D82C54500F6FA0E /* OBAddBookViewController.swift in Sources */,
 				A61A16DF1D9A693800996842 /* OBLabelsViewController.swift in Sources */,
 				A610F3421DA7077F0060149B /* OBAccountTableViewCell.swift in Sources */,
@@ -497,7 +513,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -536,7 +552,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

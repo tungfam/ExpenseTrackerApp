@@ -12,10 +12,10 @@ import CoreData
 class OBAddAccountViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate {
    
 //MARK: init
+    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var accountDataInputTableView: UITableView!
     let InputDataCellIdentifier = "InputDataCell"
     let InputDataTableViewCellIdentifier = "InputDataTableViewCell"
-    let fieldsToInput = 4
     let inputSections = 1
     let currencyRowIndexPath = IndexPath.init(row: 1, section: 0)
     let inputFieldsArray: Array = ["Name*", "Currency*", "Amount", "Sign"]
@@ -24,28 +24,18 @@ class OBAddAccountViewController: UIViewController, UITableViewDelegate, UITable
     var selectedCurrency = ""
     
     var dictWithAccountData = [String: AnyObject]()
-    let paramsForPostAccount = ["key", "name", "currency", "start_amt", "sign"]
+    let paramsForPostAccount = ["name", "currency", "start_amt", "sign", "key"]
     
     var books = [NSManagedObject]()
     
 //MARK: UIViewController lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupUI()
         accountDataInputTableView.delegate = self
         accountDataInputTableView.dataSource = self
         pickerView.delegate = self
         pickerView.dataSource = self
-        
-        // adding book key param to dict
-        
-        let defaults = UserDefaults.standard
-        var chosenBookKey = ""
-        if let chosenBookKeyFromDefaults = defaults.string(forKey: "chosenBookKey") {
-            chosenBookKey = chosenBookKeyFromDefaults
-        }
-        let keyParamDict = paramsForPostAccount[0]
-        dictWithAccountData[keyParamDict] = chosenBookKey as AnyObject?
     }
 
 //MARK: UIPickerViewDataSource
@@ -72,7 +62,7 @@ class OBAddAccountViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fieldsToInput
+        return inputFieldsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -116,11 +106,11 @@ class OBAddAccountViewController: UIViewController, UITableViewDelegate, UITable
                         // adding value to dictionary
                         if i == 2    {
                             let amountValue : Float = NSString(string: inputField.text!).floatValue
-                            let paramNameInDict = paramsForPostAccount[i+1]
+                            let paramNameInDict = paramsForPostAccount[i]
                             dictWithAccountData[paramNameInDict] = amountValue as AnyObject?
                         } else  {
                             let valueToPass = inputField.text
-                            let paramNameInDict = paramsForPostAccount[i+1]
+                            let paramNameInDict = paramsForPostAccount[i]
                             dictWithAccountData[paramNameInDict] = valueToPass as AnyObject?
                         }
                     }
@@ -134,12 +124,15 @@ class OBAddAccountViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func postAccount()  {
-        print(dictWithAccountData)
+        // adding book key param to dict
         let defaults = UserDefaults.standard
         var chosenBookKey = ""
         if let chosenBookKeyFromDefaults = defaults.string(forKey: "chosenBookKey") {
             chosenBookKey = chosenBookKeyFromDefaults
         }
+        let keyParamDict = paramsForPostAccount[4]
+        dictWithAccountData[keyParamDict] = chosenBookKey as AnyObject?
+        print(dictWithAccountData)
         let url = NSURL(string: "http://obsly.com/api/v1/\(chosenBookKey)/accounts")
         print(url)
         let session = URLSession.shared
@@ -185,35 +178,9 @@ class OBAddAccountViewController: UIViewController, UITableViewDelegate, UITable
         task.resume()
     }
     
-    internal func getChosenIndexOfBook(index: Int)  {
-//        chosenBookIndex = index
-//        print(chosenBookIndex)
-//        
-//        // getting books from coredata
-//        if #available(iOS 10.0, *) {
-//            let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//            let fetchRequest: NSFetchRequest<Book> = Book.fetchRequest()
-//            do {
-//                let results =
-//                    try managedContext.fetch(fetchRequest)
-//                books = results
-//            } catch let error as NSError {
-//                print("Could not fetch \(error), \(error.userInfo)")
-//            }
-//        } else {
-//            print("error: old iOS version")
-//        }
-//        
-//        let book = books[index]
-////        chosenBookKey = book.value(forKey: "bookKey") as! String
-//        print("add account vc")
-//        print(book.value(forKey: "bookName") as! String?)
-//        print(book.value(forKey: "bookKey") as! String?)
-    }
-
     func setupUI()  {
-        accountDataInputTableView.tableFooterView = UIView() // remove unused cell in table view
-        self.navigationController!.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.applicationBoldFontOfSize(20)]
+        self.accountDataInputTableView.tableFooterView = UIView() // remove unused cell in table view
+        self.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.applicationBoldFontOfSize(20)]
     }
     
     
