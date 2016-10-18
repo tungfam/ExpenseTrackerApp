@@ -13,7 +13,6 @@ class OBAccountsViewController: UIViewController, UITableViewDelegate, UITableVi
 
 //MARK: init
     let addAccountSegueIdentifier = "addAccountSegue"
-    var books = [NSManagedObject]()
     let accountCellIdentifier = "accountCellIdentifier"
     @IBOutlet weak var accountsListTableView: UITableView!
     var pulledAccounts: Array<Dictionary<String,AnyObject>> = [[String: AnyObject]]()
@@ -30,10 +29,6 @@ class OBAccountsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         getAccountsList()
-    }
-
-    @IBAction func addAccountAction(_ sender: UIBarButtonItem) {
-        self.performSegue(withIdentifier: self.addAccountSegueIdentifier, sender: nil)
     }
     
 //MARK: UITableViewDataSource
@@ -103,6 +98,10 @@ class OBAccountsViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
 //MARK: Private methods
+    
+    @IBAction func addAccountAction(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: self.addAccountSegueIdentifier, sender: nil)
+    }
     
     func deleteAccount(index: Int)    {
         let defaults = UserDefaults.standard
@@ -216,8 +215,8 @@ class OBAccountsViewController: UIViewController, UITableViewDelegate, UITableVi
     
 //MARK: UI Stuff
     func setupUI()  {
-        self.automaticallyAdjustsScrollViewInsets = false // remove blank space above table view
-        accountsListTableView.tableFooterView = UIView() // remove unused cell in table view
+//        self.automaticallyAdjustsScrollViewInsets = false // remove blank space above table view
+        self.accountsListTableView.tableFooterView = UIView() // remove unused cell in table view
         self.accountsListTableView.allowsSelection = false
         self.tabBarController?.navigationItem.rightBarButtonItem = editButtonItem
     }

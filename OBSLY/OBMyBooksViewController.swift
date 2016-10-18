@@ -15,6 +15,7 @@ class OBMyBooksViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var booksListTableView: UITableView!
     
     let addBookManuallySegueIdentifier = "addBookManuallySegue"
+    let addBookQRSegueIdentifier = "addBookQRSegue"
     let openBookSegueIdentifier = "openBookSegue"
     let bookCellIdentifier = "ShowDataTableViewCell"
     
@@ -139,7 +140,13 @@ class OBMyBooksViewController: UIViewController, UITableViewDelegate, UITableVie
             self.performSegue(withIdentifier: self.addBookManuallySegueIdentifier, sender: nil)
             }
         )
+        let createBookQRAction = UIAlertAction(title: "Using QR-code", style: .default, handler: {
+            action in
+            self.performSegue(withIdentifier: self.addBookQRSegueIdentifier, sender: nil)
+            }
+        )
         alertController.addAction(createBookManuallyAction)
+        alertController.addAction(createBookQRAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
     }

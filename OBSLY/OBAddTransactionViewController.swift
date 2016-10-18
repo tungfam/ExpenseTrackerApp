@@ -57,7 +57,8 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
         // we set empty chosen account so that when user chooses the account we show chosen data
         defaults.set("Choose account", forKey: "chosenAccountName")
         defaults.set(nil, forKey: "chosenAccountID")
-        let testLabelsArray: [String] = ["test label 1", "test label 2"]
+//        let testLabelsArray: [String] = ["test_label_1", "test_label_2", "test_label_3"]
+        let testLabelsArray: [String] = ["test_label_1"]
         defaults.setValue(testLabelsArray, forKey: "chosenLabelsArray")
     }
     

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A60A1CF61DB3C14C003B9411 /* OBShowLabelsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60A1CF51DB3C14C003B9411 /* OBShowLabelsTableViewCell.swift */; };
+		A60A1CF81DB3D047003B9411 /* OBAddBookQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60A1CF71DB3D046003B9411 /* OBAddBookQRViewController.swift */; };
 		A610F33C1DA6E27A0060149B /* String+Checking.swift in Sources */ = {isa = PBXBuildFile; fileRef = A610F33B1DA6E27A0060149B /* String+Checking.swift */; };
 		A610F33E1DA6EE2E0060149B /* UIAlertController+PresentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A610F33D1DA6EE2E0060149B /* UIAlertController+PresentError.swift */; };
 		A610F3401DA6F7DF0060149B /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A610F33F1DA6F7DF0060149B /* UIViewController+Alert.swift */; };
@@ -58,9 +60,12 @@
 		A6B4033D1D8D6B2A001D045A /* Book+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B4033B1D8D6B2A001D045A /* Book+CoreDataProperties.swift */; };
 		A6B403401D8D6D8C001D045A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B4033F1D8D6D8C001D045A /* CoreData.framework */; };
 		A6B403431D8D7146001D045A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B403421D8D7146001D045A /* DataController.swift */; };
+		A6E19DF71DB15DA2003DFE8C /* OBShowTransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E19DF61DB15DA2003DFE8C /* OBShowTransactionTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A60A1CF51DB3C14C003B9411 /* OBShowLabelsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBShowLabelsTableViewCell.swift; sourceTree = "<group>"; };
+		A60A1CF71DB3D046003B9411 /* OBAddBookQRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBAddBookQRViewController.swift; sourceTree = "<group>"; };
 		A610F33B1DA6E27A0060149B /* String+Checking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Checking.swift"; sourceTree = "<group>"; };
 		A610F33D1DA6EE2E0060149B /* UIAlertController+PresentError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+PresentError.swift"; sourceTree = "<group>"; };
 		A610F33F1DA6F7DF0060149B /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
@@ -114,6 +119,7 @@
 		A6B4033F1D8D6D8C001D045A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A6B403411D8D6EBB001D045A /* OBSLY-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OBSLY-Prefix.pch"; sourceTree = "<group>"; };
 		A6B403421D8D7146001D045A /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		A6E19DF61DB15DA2003DFE8C /* OBShowTransactionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBShowTransactionTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +215,7 @@
 			children = (
 				A61592801D8007FD00B8C814 /* OBMyBooksViewController.swift */,
 				A66950401D82C54500F6FA0E /* OBAddBookViewController.swift */,
+				A60A1CF71DB3D046003B9411 /* OBAddBookQRViewController.swift */,
 			);
 			name = Books;
 			sourceTree = "<group>";
@@ -254,6 +261,8 @@
 		A66950421D82CB5300F6FA0E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				A60A1CF51DB3C14C003B9411 /* OBShowLabelsTableViewCell.swift */,
+				A6E19DF61DB15DA2003DFE8C /* OBShowTransactionTableViewCell.swift */,
 				A675A9AA1DAFB7D100C8E433 /* OBChooseAccountCellTableViewCell.swift */,
 				A675A9AC1DAFB99100C8E433 /* OBChooseLabelsCell.swift */,
 				A610F3411DA7077F0060149B /* OBAccountTableViewCell.swift */,
@@ -435,6 +444,7 @@
 				A675A9AB1DAFB7D100C8E433 /* OBChooseAccountCellTableViewCell.swift in Sources */,
 				A612C1E91DAB7E8C00BACF31 /* OBAddTransactionViewController.swift in Sources */,
 				A675A9AD1DAFB99100C8E433 /* OBChooseLabelsCell.swift in Sources */,
+				A60A1CF61DB3C14C003B9411 /* OBShowLabelsTableViewCell.swift in Sources */,
 				A66950451D82CB9F00F6FA0E /* InputDataTableViewCell.swift in Sources */,
 				A675A9B11DB01AF200C8E433 /* OBChooseAccountTableViewController.swift in Sources */,
 				A66950411D82C54500F6FA0E /* OBAddBookViewController.swift in Sources */,
@@ -444,6 +454,8 @@
 				A6B403431D8D7146001D045A /* DataController.swift in Sources */,
 				A61128461D7D679200B6AC5A /* AppDelegate.swift in Sources */,
 				A610F33E1DA6EE2E0060149B /* UIAlertController+PresentError.swift in Sources */,
+				A6E19DF71DB15DA2003DFE8C /* OBShowTransactionTableViewCell.swift in Sources */,
+				A60A1CF81DB3D047003B9411 /* OBAddBookQRViewController.swift in Sources */,
 				A61592811D8007FD00B8C814 /* OBMyBooksViewController.swift in Sources */,
 				A6B403381D8D6966001D045A /* CoreDataModel.xcdatamodeld in Sources */,
 				A6B4033D1D8D6B2A001D045A /* Book+CoreDataProperties.swift in Sources */,
