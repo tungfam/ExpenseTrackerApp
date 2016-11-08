@@ -1,0 +1,15 @@
+PODS:
+  - Alamofire (4.0.1)
+  - QRCodeReader.swift (7.2.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - QRCodeReader.swift
+
+SPEC CHECKSUMS:
+  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  QRCodeReader.swift: 2ddf74993243106dd2be5cf9f6e13c7a3e9a2d00
+
+PODFILE CHECKSUM: 7c03ce0abbc31de5b5f5ba6cf7d479e9ec900d70
+
+COCOAPODS: 1.0.1

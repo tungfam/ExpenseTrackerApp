@@ -6,6 +6,10 @@
 //  Copyright © 2016 Tung Fam. All rights reserved.
 //
 
+/* ------------------------------------------ */
+/* ACCOUNT CELL ON THE TABLE VIEW OF TRANSACTION CREATION */
+/* ------------------------------------------ */
+
 import UIKit
 
 class OBChooseAccountCellTableViewCell: UITableViewCell {

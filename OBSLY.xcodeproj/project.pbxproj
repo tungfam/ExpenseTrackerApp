@@ -24,6 +24,8 @@
 		A61A16DD1D9A632D00996842 /* OBTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61A16DC1D9A632D00996842 /* OBTabBarViewController.swift */; };
 		A61A16DF1D9A693800996842 /* OBLabelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61A16DE1D9A693800996842 /* OBLabelsViewController.swift */; };
 		A61A16E61D9A6B1100996842 /* OBAddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61A16E51D9A6B1100996842 /* OBAddAccountViewController.swift */; };
+		A61CCED71DCFAF9500B1B5D1 /* OBChooseLabelsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61CCED61DCFAF9500B1B5D1 /* OBChooseLabelsTableViewController.swift */; };
+		A61CCED91DCFB54300B1B5D1 /* OBLabelsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61CCED81DCFB54300B1B5D1 /* OBLabelsTableViewCell.swift */; };
 		A64CEC761D85ADCE00382E77 /* ShowDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64CEC751D85ADCE00382E77 /* ShowDataTableViewCell.swift */; };
 		A65E039C1D986AA200CFB8FA /* OBAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65E039B1D986AA200CFB8FA /* OBAccountsViewController.swift */; };
 		A66950411D82C54500F6FA0E /* OBAddBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66950401D82C54500F6FA0E /* OBAddBookViewController.swift */; };
@@ -61,6 +63,7 @@
 		A6B403401D8D6D8C001D045A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B4033F1D8D6D8C001D045A /* CoreData.framework */; };
 		A6B403431D8D7146001D045A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B403421D8D7146001D045A /* DataController.swift */; };
 		A6E19DF71DB15DA2003DFE8C /* OBShowTransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E19DF61DB15DA2003DFE8C /* OBShowTransactionTableViewCell.swift */; };
+		FD9ED8147AA7F72CF5487EDE /* Pods_OBSLY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7A2865D71F24A36E6BBDA38 /* Pods_OBSLY.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +86,8 @@
 		A61A16DC1D9A632D00996842 /* OBTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBTabBarViewController.swift; sourceTree = "<group>"; };
 		A61A16DE1D9A693800996842 /* OBLabelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBLabelsViewController.swift; sourceTree = "<group>"; };
 		A61A16E51D9A6B1100996842 /* OBAddAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBAddAccountViewController.swift; sourceTree = "<group>"; };
+		A61CCED61DCFAF9500B1B5D1 /* OBChooseLabelsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBChooseLabelsTableViewController.swift; sourceTree = "<group>"; };
+		A61CCED81DCFB54300B1B5D1 /* OBLabelsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBLabelsTableViewCell.swift; sourceTree = "<group>"; };
 		A64CEC751D85ADCE00382E77 /* ShowDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowDataTableViewCell.swift; sourceTree = "<group>"; };
 		A65E039B1D986AA200CFB8FA /* OBAccountsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBAccountsViewController.swift; sourceTree = "<group>"; };
 		A66950401D82C54500F6FA0E /* OBAddBookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBAddBookViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +125,9 @@
 		A6B403411D8D6EBB001D045A /* OBSLY-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OBSLY-Prefix.pch"; sourceTree = "<group>"; };
 		A6B403421D8D7146001D045A /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		A6E19DF61DB15DA2003DFE8C /* OBShowTransactionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBShowTransactionTableViewCell.swift; sourceTree = "<group>"; };
+		B7A2865D71F24A36E6BBDA38 /* Pods_OBSLY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OBSLY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EFC69ACF2867F92CE00A0CE2 /* Pods-OBSLY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OBSLY.release.xcconfig"; path = "Pods/Target Support Files/Pods-OBSLY/Pods-OBSLY.release.xcconfig"; sourceTree = "<group>"; };
+		FFA53782DD3A909B28C813AD /* Pods-OBSLY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OBSLY.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OBSLY/Pods-OBSLY.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,18 +136,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6B403401D8D6D8C001D045A /* CoreData.framework in Frameworks */,
+				FD9ED8147AA7F72CF5487EDE /* Pods_OBSLY.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		33A25A88854DCB39D0F7AB4C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FFA53782DD3A909B28C813AD /* Pods-OBSLY.debug.xcconfig */,
+				EFC69ACF2867F92CE00A0CE2 /* Pods-OBSLY.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		A61128391D7D679200B6AC5A = {
 			isa = PBXGroup;
 			children = (
 				A61128441D7D679200B6AC5A /* OBSLY */,
 				A61128431D7D679200B6AC5A /* Products */,
 				A6B4033E1D8D6D8C001D045A /* Frameworks */,
+				33A25A88854DCB39D0F7AB4C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -237,6 +256,7 @@
 				A616D38A1D92C59000891166 /* OBTransactionsViewController.swift */,
 				A612C1E81DAB7E8C00BACF31 /* OBAddTransactionViewController.swift */,
 				A675A9B01DB01AF200C8E433 /* OBChooseAccountTableViewController.swift */,
+				A61CCED61DCFAF9500B1B5D1 /* OBChooseLabelsTableViewController.swift */,
 			);
 			name = Transactions;
 			sourceTree = "<group>";
@@ -266,6 +286,7 @@
 				A675A9AA1DAFB7D100C8E433 /* OBChooseAccountCellTableViewCell.swift */,
 				A675A9AC1DAFB99100C8E433 /* OBChooseLabelsCell.swift */,
 				A610F3411DA7077F0060149B /* OBAccountTableViewCell.swift */,
+				A61CCED81DCFB54300B1B5D1 /* OBLabelsTableViewCell.swift */,
 				A64CEC751D85ADCE00382E77 /* ShowDataTableViewCell.swift */,
 				A66950431D82CB9F00F6FA0E /* InputDataTableViewCell.swift */,
 				A66950441D82CB9F00F6FA0E /* InputDataTableViewCell.xib */,
@@ -336,6 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				A6B4033F1D8D6D8C001D045A /* CoreData.framework */,
+				B7A2865D71F24A36E6BBDA38 /* Pods_OBSLY.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -347,9 +369,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A61128541D7D679200B6AC5A /* Build configuration list for PBXNativeTarget "OBSLY" */;
 			buildPhases = (
+				F061DE5A07E108B6C05D5D52 /* [CP] Check Pods Manifest.lock */,
 				A611283E1D7D679200B6AC5A /* Sources */,
 				A611283F1D7D679200B6AC5A /* Frameworks */,
 				A61128401D7D679200B6AC5A /* Resources */,
+				F309C2E943E26C0D9F547BEE /* [CP] Embed Pods Frameworks */,
+				8E6017804D49DC539A5C7029 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -431,6 +456,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8E6017804D49DC539A5C7029 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OBSLY/Pods-OBSLY-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F061DE5A07E108B6C05D5D52 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F309C2E943E26C0D9F547BEE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OBSLY/Pods-OBSLY-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A611283E1D7D679200B6AC5A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -450,12 +523,14 @@
 				A66950411D82C54500F6FA0E /* OBAddBookViewController.swift in Sources */,
 				A61A16DF1D9A693800996842 /* OBLabelsViewController.swift in Sources */,
 				A610F3421DA7077F0060149B /* OBAccountTableViewCell.swift in Sources */,
+				A61CCED71DCFAF9500B1B5D1 /* OBChooseLabelsTableViewController.swift in Sources */,
 				A64CEC761D85ADCE00382E77 /* ShowDataTableViewCell.swift in Sources */,
 				A6B403431D8D7146001D045A /* DataController.swift in Sources */,
 				A61128461D7D679200B6AC5A /* AppDelegate.swift in Sources */,
 				A610F33E1DA6EE2E0060149B /* UIAlertController+PresentError.swift in Sources */,
 				A6E19DF71DB15DA2003DFE8C /* OBShowTransactionTableViewCell.swift in Sources */,
 				A60A1CF81DB3D047003B9411 /* OBAddBookQRViewController.swift in Sources */,
+				A61CCED91DCFB54300B1B5D1 /* OBLabelsTableViewCell.swift in Sources */,
 				A61592811D8007FD00B8C814 /* OBMyBooksViewController.swift in Sources */,
 				A6B403381D8D6966001D045A /* CoreDataModel.xcdatamodeld in Sources */,
 				A6B4033D1D8D6B2A001D045A /* Book+CoreDataProperties.swift in Sources */,
@@ -573,6 +648,7 @@
 		};
 		A61128551D7D679200B6AC5A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FFA53782DD3A909B28C813AD /* Pods-OBSLY.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -589,6 +665,7 @@
 		};
 		A61128561D7D679200B6AC5A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EFC69ACF2867F92CE00A0CE2 /* Pods-OBSLY.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

@@ -62,12 +62,11 @@ class OBAddBookViewController: UIViewController, UITableViewDelegate, UITableVie
             if (view is UITextField) {
                 let bookNameField = (view as! UITextField)
                 if bookNameField.text == ""    {
-                    let alert = UIAlertController(title: "Oops!", message: "Please fill up the empty field(s)", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Oops!", message: "Please enter the book name", preferredStyle: .alert)
                     let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                     alert.addAction(defaultAction)
                     present(alert, animated: true, completion: nil)
                 } else {
-                    print(bookNameField.text)
                     let bookNameFromField = bookNameField.text!
                     self.saveBook(name: bookNameFromField)
                     self.dismiss(animated: true, completion: nil)

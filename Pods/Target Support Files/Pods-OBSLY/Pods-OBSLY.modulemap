@@ -1,0 +1,6 @@
+framework module Pods_OBSLY {
+  umbrella header "Pods-OBSLY-umbrella.h"
+
+  export *
+  module * { export * }
+}

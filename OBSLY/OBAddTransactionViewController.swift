@@ -27,7 +27,8 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
 //MARK: init
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var transactionsTableView: UITableView!
-    let chooseAccSegue = "chooseAccountSegue"
+    let chooseAccSegueIdentifier = "chooseAccountSegue"
+    let chooseLabelsSegueIdentifier = "chooseLabelsSegue"
     let InputDataCellIdentifier = "InputDataCell" // cell's identifier
     let accountCellIdentifier = "accountCell"
     let chooseLabelsCellIdentifier = "chooseLabelsCell"
@@ -57,9 +58,11 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
         // we set empty chosen account so that when user chooses the account we show chosen data
         defaults.set("Choose account", forKey: "chosenAccountName")
         defaults.set(nil, forKey: "chosenAccountID")
+        defaults.set("Choose labels", forKey: "chosenLabelsString")
+        defaults.set(nil, forKey: "chosenLabelsArray")
 //        let testLabelsArray: [String] = ["test_label_1", "test_label_2", "test_label_3"]
-        let testLabelsArray: [String] = ["test_label_1"]
-        defaults.setValue(testLabelsArray, forKey: "chosenLabelsArray")
+//        let testLabelsArray: [String] = ["test_label_1"]
+//        defaults.setValue(testLabelsArray, forKey: "chosenLabelsArray")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,8 +90,7 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
                 cell = accountCell
             } else if cellID == .labels {
                 let labelsCell = tableView.dequeueReusableCell(withIdentifier: chooseLabelsCellIdentifier, for: indexPath) as! OBChooseLabelsCell
-                let labelsArray = defaults.array(forKey: "chosenLabelsArray") as! [String]
-                let labelsString = labelsArray.joined(separator: ", ")
+                let labelsString = defaults.value(forKey: "chosenLabelsString") as! String
                 labelsCell.chooseLabelButton.setTitle(labelsString, for: .normal)
                 
                 cell = labelsCell
@@ -307,10 +309,11 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     @IBAction func openChooseAccount(_ sender: UIButton) {
-        performSegue(withIdentifier: chooseAccSegue, sender: nil)
+        performSegue(withIdentifier: chooseAccSegueIdentifier, sender: nil)
     }
     
     @IBAction func openChooseLabels(_ sender: UIButton) {
+        performSegue(withIdentifier: chooseLabelsSegueIdentifier, sender: nil)
     }
     
 //MARK: - Assisting Methods

@@ -6,6 +6,10 @@
 //  Copyright © 2016 Tung Fam. All rights reserved.
 //
 
+/* ------------------------------------------ */
+/* TABLE VIEW WHERE USER CHOOSES ACCOUNT AMONG OTHER LABELS WHEN CREATING TRANSACTION */
+/* ------------------------------------------ */
+
 import UIKit
 
 class OBAccountTableViewCell: UITableViewCell {

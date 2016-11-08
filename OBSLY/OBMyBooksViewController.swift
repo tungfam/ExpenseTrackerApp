@@ -8,8 +8,10 @@
 
 import UIKit
 import CoreData
+import AVFoundation
+import QRCodeReader
 
-class OBMyBooksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class OBMyBooksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, QRCodeReaderViewControllerDelegate {
 
 //MARK: init
     @IBOutlet weak var booksListTableView: UITableView!
@@ -21,6 +23,13 @@ class OBMyBooksViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var chosenIndexPath = 0
     var books = [NSManagedObject]()
+    
+    
+    // Good practice: create the reader lazily to avoid cpu overload during the
+    // initialization and each time we need to scan a QRCode
+    lazy var readerVC = QRCodeReaderViewController(builder: QRCodeReaderViewControllerBuilder {
+        $0.reader = QRCodeReader(metadataObjectTypes: [AVMetadataObjectTypeQRCode], captureDevicePosition: .back)
+    })
     
 //MARK: UIViewController lifecycle
     override func viewDidLoad() {
@@ -142,7 +151,7 @@ class OBMyBooksViewController: UIViewController, UITableViewDelegate, UITableVie
         )
         let createBookQRAction = UIAlertAction(title: "Using QR-code", style: .default, handler: {
             action in
-            self.performSegue(withIdentifier: self.addBookQRSegueIdentifier, sender: nil)
+            self.scanAction(sender)
             }
         )
         alertController.addAction(createBookManuallyAction)
@@ -163,5 +172,65 @@ class OBMyBooksViewController: UIViewController, UITableViewDelegate, UITableVie
     func reloadTableView(timer: Timer)  {
         booksListTableView.reloadData()
     }
+
+    
+
+    
+//****************************** MARK: Delegate for qr code scanner
+    
+    func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
+        reader.stopScanning()
+        dismiss(animated: true, completion: nil)
+        let key = result.value
+        let defaults = UserDefaults.standard
+        defaults.set(key, forKey: "qrScannedKey")
+        print(result)
+        
+        //it has strange bug when you scan the code right after appearing the qr code VC then it wouldn't perform the segue. so i added this 0.1sec delay
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1 ) {
+            self.performSegue(withIdentifier: self.addBookQRSegueIdentifier, sender: nil)
+        }
+    }
+    
+    func readerDidCancel(_ reader: QRCodeReaderViewController)  {
+        reader.stopScanning()
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func scanAction(_ sender: AnyObject) {
+        // Retrieve the QRCode content
+        // By using the delegate pattern
+        readerVC.delegate = self
+        
+        // Or by using the closure pattern
+        readerVC.completionBlock = { (result: QRCodeReaderResult?) in
+            print(result)
+        }
+        
+        // Presents the readerVC as modal form sheet
+        readerVC.modalPresentationStyle = .formSheet
+        present(readerVC, animated: true, completion: nil)
+    }
+    
+    //This is an optional delegate method, that allows you to be notified when the user switches the cameraName
+    //By pressing on the switch camera button
+    func reader(_ reader: QRCodeReaderViewController, didSwitchCamera newCaptureDevice: AVCaptureDeviceInput) {
+        if let cameraName = newCaptureDevice.device.localizedName {
+            print("Switching capturing to: \(cameraName)")
+        }
+    }
+    
+//    func reader(_ reader: QRCodeReader, didScanResult result: QRCodeReaderResult) {
+//        reader.stopScanning()
+//        dismiss(animated: true, completion: nil)
+//    }
+    
+//        func readerDidCancel(_ reader: QRCodeReader) {
+//            reader.stopScanning()
+//    
+//            dismiss(animated: true, completion: nil)
+//        }
+    
+//****************************** MARK: Delegate for qr code scanner
     
 }

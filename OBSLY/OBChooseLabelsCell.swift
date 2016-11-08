@@ -6,6 +6,10 @@
 //  Copyright © 2016 Tung Fam. All rights reserved.
 //
 
+/* ------------------------------------------ */
+/* LABELS CELL ON THE TABLE VIEW OF TRANSACTION CREATION */
+/* ------------------------------------------ */
+
 import UIKit
 
 class OBChooseLabelsCell: UITableViewCell {

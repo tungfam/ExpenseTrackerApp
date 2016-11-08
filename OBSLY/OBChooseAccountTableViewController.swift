@@ -19,7 +19,6 @@ class OBChooseAccountTableViewController: UITableViewController {
 
         getAccountsList()
         setupUI()
-        self.navigationController?.navigationBar.isTranslucent = false
 //        self.chooseAccTableView.delegate = self
 //        self.chooseAccTableView.dataSource = self
         
@@ -151,6 +150,7 @@ class OBChooseAccountTableViewController: UITableViewController {
         self.chooseAccTableView.tableFooterView = UIView() // remove unused cell in table view
         self.chooseAccTableView.allowsSelection = true
         self.title = "Choose account"
+        self.navigationController?.navigationBar.isTranslucent = false
     }
 
 }
