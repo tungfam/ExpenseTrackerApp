@@ -694,10 +694,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Gza-3L-TLu">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="iQ1-9O-KM8">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="iQ1-9O-KM8">
                             <color key="tintColor" red="1" green="0.2901960784" blue="0.46274509800000002" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
-                                <action selector="cancelAction:" destination="Lsp-ts-kwU" id="Vnw-nq-y9V"/>
+                                <action selector="addLabelAction:" destination="Lsp-ts-kwU" id="Lq5-SY-8lI"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="eZU-HO-wqp">

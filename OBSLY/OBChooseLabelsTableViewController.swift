@@ -232,9 +232,31 @@ class OBChooseLabelsTableViewController: UITableViewController {
         sender.isSelected = (sender.isSelected == true ? false : true)
     }
     
-    @IBAction func cancelAction(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+    @IBAction func addLabelAction(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController.init(title: "Add new Label", message: "Enter the name of new label", preferredStyle: .alert)
+        let cancelAction = UIAlertAction.init(title: "Cancel", style: .destructive, handler: nil)
+        let addAction = UIAlertAction.init(title: "Add", style: .default, handler: { (_) in
+            
+            let newLabelName =  alert.textFields?[0].text
+            let newLabelDict = ["label" : newLabelName!, "n" : 0] as [String : Any]
+            self.pulledLabels.append(newLabelDict as [String : AnyObject])
+            self.chooseLabelsTableView.reloadData()
+            
+        })
+//        let labelTextField = alert.textFields![0] as UITextField
+        alert.addAction(cancelAction)
+        alert.addAction(addAction)
+        alert.addTextField(configurationHandler: { (textField) in
+//            textField.placeholder = "Login"
+//            
+//            NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { (notification) in
+//                
+//            }
+        })
+        self.present(alert, animated: true, completion: nil)
     }
+    
+    
     
     @IBAction func doneAction(_ sender: UIBarButtonItem) {
         let quantity = pulledLabels.count
