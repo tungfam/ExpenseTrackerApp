@@ -29,6 +29,7 @@ class OBAccountsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         getAccountsList()
+        self.tabBarController?.navigationItem.rightBarButtonItem = editButtonItem
     }
     
 //MARK: UITableViewDataSource
@@ -218,6 +219,5 @@ class OBAccountsViewController: UIViewController, UITableViewDelegate, UITableVi
 //        self.automaticallyAdjustsScrollViewInsets = false // remove blank space above table view
         self.accountsListTableView.tableFooterView = UIView() // remove unused cell in table view
         self.accountsListTableView.allowsSelection = false
-        self.tabBarController?.navigationItem.rightBarButtonItem = editButtonItem
     }
 }

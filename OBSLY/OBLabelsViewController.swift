@@ -26,6 +26,7 @@ class OBLabelsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         getLabelsList()
+        self.tabBarController?.navigationItem.rightBarButtonItem = nil
     }
 
 //MARK: - UITableViewDataSource

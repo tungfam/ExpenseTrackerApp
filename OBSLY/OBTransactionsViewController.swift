@@ -32,6 +32,7 @@ class OBTransactionsViewController: UIViewController, UITableViewDelegate, UITab
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getTransactionsList()
+        self.tabBarController?.navigationItem.rightBarButtonItem = editButtonItem
     }
 
 //MARK: - UITableViewDataSource
@@ -173,7 +174,6 @@ class OBTransactionsViewController: UIViewController, UITableViewDelegate, UITab
 //MARK: UI stuff
     func setupUI()  {
         self.transactionsTableView.tableFooterView = UIView() // remove unused cell in table view
-        self.tabBarController?.navigationItem.rightBarButtonItem = editButtonItem
         self.transactionsTableView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
 //        self.transactionsTableView.contentInset = UIEdgeInsets.zero
 //        self.automaticallyAdjustsScrollViewInsets = false // remove blank space above table view
