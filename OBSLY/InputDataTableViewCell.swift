@@ -8,10 +8,17 @@
 
 import UIKit
 
+protocol InputDataTableViewCellDelegate: class {
+    func txtFieldDidBeginEditing(sender: InputDataTableViewCell)
+    func txtFieldShouldReturn(sender: InputDataTableViewCell)
+}
+
 class InputDataTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     @IBOutlet weak var fieldTitle: UILabel!
     @IBOutlet weak var fieldValue: UITextField!
+    
+    weak var delegate:InputDataTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -53,7 +60,12 @@ class InputDataTableViewCell: UITableViewCell, UITextFieldDelegate {
     // func that will dismiss keyboard on 'return' btn
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        self.delegate?.txtFieldShouldReturn(sender: self)
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.delegate?.txtFieldDidBeginEditing(sender: self)
     }
     
 }

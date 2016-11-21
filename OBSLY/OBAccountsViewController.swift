@@ -47,14 +47,14 @@ class OBAccountsViewController: UIViewController, UITableViewDelegate, UITableVi
         let name = pulledAccounts[index]["name"]
         let sign = pulledAccounts[index]["sign"]
         let currency = pulledAccounts[index]["currency"]
-        let startAmountFloat = pulledAccounts[index]["start_amt"]
+        let currentAmountFloat = pulledAccounts[index]["amt_converted"]
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        let startAmountString = formatter.string(from: startAmountFloat as! NSNumber)
+        let currentAmountString = formatter.string(from: currentAmountFloat as! NSNumber)
         cell.accountNameLabel.text = name as! String?
         cell.accountSignLabel.text = sign as! String?
         cell.accountCurrencyLabel.text = currency as! String?
-        cell.accountAmountLabel.text = startAmountString! as String
+        cell.accountAmountLabel.text = currentAmountString! as String
 
         // make separator line between cells to fill full width
         cell.separatorInset = UIEdgeInsetsMake(0, 0, cell.frame.size.width, 0)
@@ -171,7 +171,7 @@ class OBAccountsViewController: UIViewController, UITableViewDelegate, UITableVi
         if let chosenBookKeyFromDefaults = defaults.string(forKey: "chosenBookKey") {
             chosenBookKey = chosenBookKeyFromDefaults
         }
-        let urlPath: String = "http://obsly.com/api/v1/\(chosenBookKey)/accounts"
+        let urlPath: String = "http://obsly.com/api/v1/\(chosenBookKey)/accounts?load_amount=1"
         let url: NSURL = NSURL(string: urlPath)!
         let request: NSMutableURLRequest = NSMutableURLRequest(url: url as URL)
         request.httpMethod = "GET"

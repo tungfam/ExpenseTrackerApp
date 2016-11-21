@@ -11,6 +11,7 @@ import UIKit
 class OBShowLabelsTableViewCell: UITableViewCell {
     @IBOutlet weak var labelNameLabel: UILabel!
     @IBOutlet weak var transactionsPlaceholderLabel: UILabel!
+    @IBOutlet weak var currentUsdAmount: UILabel!
     @IBOutlet weak var quantityLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -23,7 +23,7 @@ enum OBPickerType   {
     case currencyPicker
 }
 
-class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate {
+class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, InputDataTableViewCellDelegate {
 //MARK: init
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var transactionsTableView: UITableView!
@@ -116,15 +116,19 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
                     nibCell.fieldValue.inputAccessoryView = toolBar
                     nibCell.fieldValue.inputView = currencyPickerView
                     nibCell.fieldValue.text = selectedCurrency
+                    nibCell.delegate = self
                     break
                 case .rate:
                     nibCell.fieldValue.keyboardType = UIKeyboardType.decimalPad
+                    nibCell.delegate = self
+                    break
+                case .note:
+                    nibCell.delegate = self
                     break
                 default:
                     break
                 }
                 nibCell.fieldTitle.text = inputFieldsArray[indexPath.row]
-                
                 cell = nibCell
             }
         }
@@ -382,5 +386,22 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
     func setupUI()  {
         self.transactionsTableView.tableFooterView = UIView() // remove unused cell in table view
         self.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.applicationBoldFontOfSize(20)]
+    }
+    
+//MARK: Text field delegate
+    func txtFieldDidBeginEditing(sender: InputDataTableViewCell) {
+        let screenSize: CGRect = UIScreen.main.bounds
+        let screenHeight = screenSize.height
+        if screenHeight < 570   {
+            self.transactionsTableView.setContentOffset(CGPoint(x: 0, y: 60), animated: true)
+        }
+    }
+    
+    func txtFieldShouldReturn(sender: InputDataTableViewCell) {
+        let screenSize: CGRect = UIScreen.main.bounds
+        let screenHeight = screenSize.height
+        if screenHeight < 570   {
+            self.transactionsTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        }
     }
 }

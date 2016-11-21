@@ -53,6 +53,7 @@ class OBTransactionsViewController: UIViewController, UITableViewDelegate, UITab
         let labelsNamesArray = (pulledTransactions[index]["label_list"] as? NSArray) as! Array<String>?
         let labelsNamesString = labelsNamesArray?.joined(separator: ", ")
         let currency = pulledTransactions[index]["currency"]
+        let note = pulledTransactions[index]["note"]
         let amountFloat = pulledTransactions[index]["amt"]
         let numbertFormatter = NumberFormatter()
         numbertFormatter.numberStyle = .decimal
@@ -69,7 +70,7 @@ class OBTransactionsViewController: UIViewController, UITableViewDelegate, UITab
         cell.labelsNamesLabel.text = labelsNamesString
         cell.amountLabel.text = amountString
         cell.currencyLabel.text = currency as! String?
-        
+        cell.noteLabel.text = note as? String
         
         // make separator line between cells to fill full width
         cell.separatorInset = UIEdgeInsetsMake(0, 0, cell.frame.size.width, 0)
@@ -175,6 +176,7 @@ class OBTransactionsViewController: UIViewController, UITableViewDelegate, UITab
     func setupUI()  {
         self.transactionsTableView.tableFooterView = UIView() // remove unused cell in table view
         self.transactionsTableView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
+        self.transactionsTableView.allowsSelection = false
 //        self.transactionsTableView.contentInset = UIEdgeInsets.zero
 //        self.automaticallyAdjustsScrollViewInsets = false // remove blank space above table view
 //        self.transactionsTableView.allowsSelection = false

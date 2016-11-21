@@ -44,12 +44,26 @@ class OBLabelsViewController: UIViewController, UITableViewDataSource, UITableVi
         let index = (indexPath as NSIndexPath).row
         let labelName = pulledLabels[index]["label"]
         let transactionsQuantityFloat = pulledLabels[index]["n"]
+        let amounts = pulledLabels[index]["amt"]
+        let UsdAmounts = amounts?["USD"] as AnyObject
+        let minusAmtFloat = UsdAmounts["minus_amt"]
+        let plusAmtFloat = UsdAmounts["plus_amt"]
+        
         let numbertFormatter = NumberFormatter()
         numbertFormatter.numberStyle = .decimal
         let transactionsQuantityString = numbertFormatter.string(from: transactionsQuantityFloat as! NSNumber)
+        let minusAmtString = numbertFormatter.string(from: minusAmtFloat as! NSNumber)
+        let plusAmtString = numbertFormatter.string(from: plusAmtFloat as! NSNumber)
+        var currentUsdAmountString = ""
+        if minusAmtString == "0" {
+            currentUsdAmountString = plusAmtString!
+        } else  {
+            currentUsdAmountString = minusAmtString!
+        }
         
         cell.labelNameLabel.text = labelName as! String?
         cell.quantityLabel.text = transactionsQuantityString
+        cell.currentUsdAmount.text = currentUsdAmountString
         
         
         // make separator line between cells to fill full width
@@ -75,7 +89,7 @@ class OBLabelsViewController: UIViewController, UITableViewDataSource, UITableVi
         if let chosenBookKeyFromDefaults = defaults.string(forKey: "chosenBookKey") {
             chosenBookKey = chosenBookKeyFromDefaults
         }
-        let urlPath: String = "http://obsly.com/api/v1/\(chosenBookKey)/labels"
+        let urlPath: String = "http://obsly.com/api/v1/\(chosenBookKey)/labels?load_amount=1&convertTo=USD"
         let url: NSURL = NSURL(string: urlPath)!
         let request: NSMutableURLRequest = NSMutableURLRequest(url: url as URL)
         request.httpMethod = "GET"
