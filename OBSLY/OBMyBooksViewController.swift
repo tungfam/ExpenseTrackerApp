@@ -94,7 +94,7 @@ class OBMyBooksViewController: UIViewController, UITableViewDelegate, UITableVie
     // for deleting (editing)
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // remove the deleted item from the сore date
+            // remove the deleted item from the сore data
             
             if #available(iOS 10.0, *) {
                 let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext

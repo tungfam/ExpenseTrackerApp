@@ -59,7 +59,9 @@ class OBChooseLabelsTableViewController: UITableViewController {
         let transactionsQuantityFloat = pulledLabels[index]["n"]
         
         let amounts = pulledLabels[index]["amt"]
+    
         let UsdAmounts = amounts?["USD"] as AnyObject
+    
         let minusAmtFloat = UsdAmounts["minus_amt"]
         let plusAmtFloat = UsdAmounts["plus_amt"]
         

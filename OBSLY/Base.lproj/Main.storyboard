@@ -871,6 +871,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Transactions" image="transactions" id="tfq-3B-uCT"/>
                     <connections>
+                        <outlet property="topTableViewConstraint" destination="QWw-tY-G7X" id="YwJ-yp-PGE"/>
                         <outlet property="transactionsTableView" destination="kBk-nO-JmB" id="dpY-I4-1oR"/>
                         <segue destination="fyP-be-yqe" kind="presentation" identifier="addTransactionSegue" id="1po-JV-0kx"/>
                     </connections>

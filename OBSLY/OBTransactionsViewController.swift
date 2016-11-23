@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 
 class OBTransactionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var topTableViewConstraint: NSLayoutConstraint!
 
 //MARK: init
     @IBOutlet weak var transactionsTableView: UITableView!
@@ -89,9 +90,19 @@ class OBTransactionsViewController: UIViewController, UITableViewDelegate, UITab
     // for deleting (editing)
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // remove the deleted item from the сore date
-//            let index = indexPath.row
-//            deleteAccount(index: index)
+            let index = (indexPath as NSIndexPath).row
+            let transactionID = pulledTransactions[index]["_id"] as! String
+            self.deleteTransaction(transactionID: transactionID)
+            
+            // Delete the row from the data source
+            self.pulledTransactions.remove(at: index)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            // delay to reload the table
+            let when = DispatchTime.now() + 0.1
+            DispatchQueue.main.asyncAfter(deadline: when){
+                self.transactionsTableView.reloadData()
+            }
+
         }
     }
     
@@ -104,7 +115,7 @@ class OBTransactionsViewController: UIViewController, UITableViewDelegate, UITab
     //for deleting (editing)
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-//        self.accountsListTableView.setEditing(editing, animated: animated)
+        self.transactionsTableView.setEditing(editing, animated: animated)
     }
 
 //MARK: For segueing
@@ -172,10 +183,61 @@ class OBTransactionsViewController: UIViewController, UITableViewDelegate, UITab
         task.resume()
     }
     
+    func deleteTransaction(transactionID: String)  {
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        self.view.addSubview(activityIndicator)
+        
+        let defaults = UserDefaults.standard
+        var chosenBookKey = ""
+        if let chosenBookKeyFromDefaults = defaults.string(forKey: "chosenBookKey") {
+            chosenBookKey = chosenBookKeyFromDefaults
+        }
+        let urlPath: String = "http://obsly.com/api/v1/\(chosenBookKey)/transactions/\(transactionID)"
+        let url: NSURL = NSURL(string: urlPath)!
+        let request: NSMutableURLRequest = NSMutableURLRequest(url: url as URL)
+        request.httpMethod = "DELETE"
+        let session = URLSession.shared
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
+            print("Response: \(response)")
+            print("Data: \(data)")
+            print("Error: \(error)")
+            if(error != nil) {
+                print("Server Error: \(error!.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.presentErrorAlert(title: "Error", error: error as! NSError)
+                }
+            }
+            else    {
+                do {
+                    // handle error
+                    let jsonDictResponse = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                    print(jsonDictResponse)
+                    if (jsonDictResponse?["error"]) != nil  { // if data contains error
+                        DispatchQueue.main.async {
+                            self.presentErrorAlertWithMessage(title: "Error", message: "Accounts not loaded: \(jsonDictResponse?["error"])")
+                        }
+                    } // handle error
+                    DispatchQueue.main.async{
+                        self.transactionsTableView.reloadData()
+                        activityIndicator.stopAnimating()
+                    }
+                } catch let error as NSError {
+                    self.presentErrorAlert(title: "Json parsing error", error: error)
+                    print("json error: \(error.localizedDescription)")
+                }
+            }
+        })
+        task.resume()
+    }
+    
 //MARK: UI stuff
     func setupUI()  {
         self.transactionsTableView.tableFooterView = UIView() // remove unused cell in table view
-        self.transactionsTableView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
+//        self.transactionsTableView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
+        self.topTableViewConstraint.constant = -64.0 // we need this line cuz 
         self.transactionsTableView.allowsSelection = false
 //        self.transactionsTableView.contentInset = UIEdgeInsets.zero
 //        self.automaticallyAdjustsScrollViewInsets = false // remove blank space above table view
