@@ -35,7 +35,7 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
     let InputDataTableViewCellIdentifier = "InputDataTableViewCell" // class name of cell
     let inputSections = 1
     let inputFieldsArray = ["Amount*", "Account*", "Labels*", "Date", "Currency", "Rate", "Note"]
-    let currencyArray = ["USD", "UAH", "EUR"]
+    var currencyArray = [String]()
     let array = ["asdf", "asdf", "EUR"]
     var datePickerView = UIDatePicker()
     var currencyPickerView = UIPickerView()
@@ -63,6 +63,8 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
 //        let testLabelsArray: [String] = ["test_label_1", "test_label_2", "test_label_3"]
 //        let testLabelsArray: [String] = ["test_label_1"]
 //        defaults.setValue(testLabelsArray, forKey: "chosenLabelsArray")
+        
+        currencyArray = defaults.value(forKey: "currenciesArray") as! [String]
     }
     
     override func viewWillAppear(_ animated: Bool) {

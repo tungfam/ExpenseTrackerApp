@@ -36,9 +36,11 @@ class OBMyBooksViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         
         setupUI()
+        
         booksListTableView.delegate = self
         navigationItem.rightBarButtonItem = editButtonItem
         
+        saveCurrencyList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -173,7 +175,22 @@ class OBMyBooksViewController: UIViewController, UITableViewDelegate, UITableVie
         booksListTableView.reloadData()
     }
 
-    
+    func saveCurrencyList() {
+        OBRequestWrapper.sharedInstance.getCurrenciesWithCompletionBlock(completion: { (response) in
+            
+            print(response)
+            let currArray = (response as! NSArray) as! Array<Dictionary<String, AnyObject>>
+            var currStringsArray: Array = [String]()
+            for curr in currArray   {
+                let currString: AnyObject = curr["label"]!
+                currStringsArray.append(currString as! String)
+            }
+            print(currStringsArray)
+            
+            let defaults = UserDefaults.standard
+            defaults.set(currStringsArray, forKey: "currenciesArray")
+        })
+    }
 
     
 //****************************** MARK: Delegate for qr code scanner

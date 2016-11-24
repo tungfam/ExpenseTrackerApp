@@ -60,10 +60,11 @@ class OBChooseLabelsTableViewController: UITableViewController {
         
         let amounts = pulledLabels[index]["amt"]
     
-        let UsdAmounts = amounts?["USD"] as AnyObject
+        let UsdAmounts = amounts?["USD"] as AnyObject?
+        
     
-        let minusAmtFloat = UsdAmounts["minus_amt"]
-        let plusAmtFloat = UsdAmounts["plus_amt"]
+        let minusAmtFloat = UsdAmounts?["minus_amt"]
+        let plusAmtFloat = UsdAmounts?["plus_amt"]
         
         let numbertFormatter = NumberFormatter()
         numbertFormatter.numberStyle = .decimal
@@ -247,7 +248,10 @@ class OBChooseLabelsTableViewController: UITableViewController {
         let addAction = UIAlertAction.init(title: "Add", style: .default, handler: { (_) in
             
             let newLabelName =  alert.textFields?[0].text
-            let newLabelDict = ["label" : newLabelName!, "n" : 0] as [String : Any]
+            let newLabelDict = ["label" : newLabelName!,
+                                    "n" : 0,
+                                  "amt" : ["USD" : ["minus_amt" : 0, "plus_amt" : 0]]
+                               ] as [String : Any]
             self.pulledLabels.append(newLabelDict as [String : AnyObject])
             self.chooseLabelsTableView.reloadData()
             
