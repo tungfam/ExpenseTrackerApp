@@ -71,9 +71,11 @@ class OBChooseAccountTableViewController: UITableViewController {
         let index = (indexPath as NSIndexPath).row
         let accountName = pulledAccounts[index]["name"]
         let accountID = pulledAccounts[index]["_id"]
+        let accountCurrency = pulledAccounts[index]["currency"]
         let defaults = UserDefaults.standard
         defaults.set(accountName, forKey: "chosenAccountName")
         defaults.set(accountID, forKey: "chosenAccountID")
+        defaults.set(accountCurrency, forKey: "chosenAccountCurrency")
         dismiss(animated: true, completion: nil)
     }
     

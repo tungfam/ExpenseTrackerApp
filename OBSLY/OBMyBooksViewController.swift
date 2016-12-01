@@ -177,15 +177,13 @@ class OBMyBooksViewController: UIViewController, UITableViewDelegate, UITableVie
 
     func saveCurrencyList() {
         OBRequestWrapper.sharedInstance.getCurrenciesWithCompletionBlock(completion: { (response) in
-            
-            print(response)
+
             let currArray = (response as! NSArray) as! Array<Dictionary<String, AnyObject>>
             var currStringsArray: Array = [String]()
             for curr in currArray   {
                 let currString: AnyObject = curr["label"]!
                 currStringsArray.append(currString as! String)
             }
-            print(currStringsArray)
             
             let defaults = UserDefaults.standard
             defaults.set(currStringsArray, forKey: "currenciesArray")

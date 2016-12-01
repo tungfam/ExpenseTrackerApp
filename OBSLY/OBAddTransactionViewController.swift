@@ -36,12 +36,12 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
     let inputSections = 1
     let inputFieldsArray = ["Amount*", "Account*", "Labels*", "Date", "Currency", "Rate", "Note"]
     var currencyArray = [String]()
-    let array = ["asdf", "asdf", "EUR"]
     var datePickerView = UIDatePicker()
     var currencyPickerView = UIPickerView()
     var selectedCurrency = ""
-    let currencyRowIndexPath = IndexPath.init(row: 4, section: 0)
     let dateRowIndexPath = IndexPath.init(row: 3, section: 0)
+    let currencyRowIndexPath = IndexPath.init(row: 4, section: 0)
+    let rateRowIndexPath = IndexPath.init(row: 5, section: 0)
     let defaults = UserDefaults.standard
     let paramsForPostTransaction = ["amt", "account_id", "label_list", "datetime_on", "currency", "rate", "note", "key"]
     var dictWithTransactionData = [String: AnyObject]()
@@ -86,9 +86,7 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
             if cellID == .account   {
                 let accountCell = tableView.dequeueReusableCell(withIdentifier: accountCellIdentifier, for: indexPath) as! OBChooseAccountCellTableViewCell
                 let accountName = defaults.string(forKey: "chosenAccountName")
-                print(defaults.string(forKey: "chosenAccountID"))
                 accountCell.chooseAccButton.setTitle(accountName, for: .normal)
-//                accountCell.chooseAccButton.setTitle("Choose account", for: .normal)
                 cell = accountCell
             } else if cellID == .labels {
                 let labelsCell = tableView.dequeueReusableCell(withIdentifier: chooseLabelsCellIdentifier, for: indexPath) as! OBChooseLabelsCell
@@ -152,12 +150,7 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView == currencyPickerView {
-            return currencyArray[row]
-        }
-        else    {
-            return array[row]
-        }
+        return currencyArray[row]
     }
 
     
@@ -186,9 +179,25 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func reloadCurrencyTextFieldRow()   {
-        let cell = transactionsTableView.dequeueReusableCell(withIdentifier: InputDataCellIdentifier, for: currencyRowIndexPath) as! InputDataTableViewCell
-        cell.fieldValue.resignFirstResponder()
+        let currencyCell = self.transactionsTableView.dequeueReusableCell(withIdentifier: self.InputDataCellIdentifier, for: self.currencyRowIndexPath) as! InputDataTableViewCell
+        currencyCell.fieldValue.resignFirstResponder()
         transactionsTableView.reloadRows(at: [currencyRowIndexPath], with: .automatic)
+       
+        
+        // also we need to update the row of rate according to selected currencies
+        let fromCurrency = defaults.value(forKey: "chosenAccountCurrency")
+        OBRequestWrapper.sharedInstance.getRate(fromCurr: fromCurrency as! String, toCurr: selectedCurrency, completion: { (response) in
+            let responseObj = response as! Dictionary<String, Any>
+            let rateFloat = responseObj["rate"]
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            let rateString = formatter.string(from: rateFloat as! NSNumber)
+            let rateCell = self.transactionsTableView.dequeueReusableCell(withIdentifier: self.InputDataCellIdentifier, for: self.rateRowIndexPath) as! InputDataTableViewCell
+            DispatchQueue.main.async {
+                rateCell.fieldValue.text = rateString
+                self.transactionsTableView.reloadRows(at: [self.rateRowIndexPath], with: .automatic)
+            }
+        })
     }
     
     func reloadDateTextFieldRow()  {
