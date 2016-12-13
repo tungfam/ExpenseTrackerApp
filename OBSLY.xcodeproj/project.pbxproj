@@ -58,8 +58,6 @@
 		A675A9AD1DAFB99100C8E433 /* OBChooseLabelsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A675A9AC1DAFB99100C8E433 /* OBChooseLabelsCell.swift */; };
 		A675A9B11DB01AF200C8E433 /* OBChooseAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A675A9B01DB01AF200C8E433 /* OBChooseAccountTableViewController.swift */; };
 		A6B403381D8D6966001D045A /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A6B403361D8D6966001D045A /* CoreDataModel.xcdatamodeld */; };
-		A6B4033C1D8D6B2A001D045A /* Book+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B4033A1D8D6B2A001D045A /* Book+CoreDataClass.swift */; };
-		A6B4033D1D8D6B2A001D045A /* Book+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B4033B1D8D6B2A001D045A /* Book+CoreDataProperties.swift */; };
 		A6B403401D8D6D8C001D045A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B4033F1D8D6D8C001D045A /* CoreData.framework */; };
 		A6B403431D8D7146001D045A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B403421D8D7146001D045A /* DataController.swift */; };
 		A6E19DF71DB15DA2003DFE8C /* OBShowTransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E19DF61DB15DA2003DFE8C /* OBShowTransactionTableViewCell.swift */; };
@@ -119,8 +117,6 @@
 		A675A9AC1DAFB99100C8E433 /* OBChooseLabelsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBChooseLabelsCell.swift; sourceTree = "<group>"; };
 		A675A9B01DB01AF200C8E433 /* OBChooseAccountTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBChooseAccountTableViewController.swift; sourceTree = "<group>"; };
 		A6B403371D8D6966001D045A /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
-		A6B4033A1D8D6B2A001D045A /* Book+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Book+CoreDataClass.swift"; path = "../Book+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A6B4033B1D8D6B2A001D045A /* Book+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Book+CoreDataProperties.swift"; path = "../Book+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A6B4033F1D8D6D8C001D045A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A6B403411D8D6EBB001D045A /* OBSLY-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OBSLY-Prefix.pch"; sourceTree = "<group>"; };
 		A6B403421D8D7146001D045A /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
@@ -346,8 +342,6 @@
 			isa = PBXGroup;
 			children = (
 				A6B403361D8D6966001D045A /* CoreDataModel.xcdatamodeld */,
-				A6B4033A1D8D6B2A001D045A /* Book+CoreDataClass.swift */,
-				A6B4033B1D8D6B2A001D045A /* Book+CoreDataProperties.swift */,
 				A6B403421D8D7146001D045A /* DataController.swift */,
 			);
 			name = Model;
@@ -513,7 +507,6 @@
 				A66951AB1D8488E300F6FA0E /* UIFont+OBFonts.swift in Sources */,
 				A61A16DD1D9A632D00996842 /* OBTabBarViewController.swift in Sources */,
 				A61A16E61D9A6B1100996842 /* OBAddAccountViewController.swift in Sources */,
-				A6B4033C1D8D6B2A001D045A /* Book+CoreDataClass.swift in Sources */,
 				A675A9AB1DAFB7D100C8E433 /* OBChooseAccountCellTableViewCell.swift in Sources */,
 				A612C1E91DAB7E8C00BACF31 /* OBAddTransactionViewController.swift in Sources */,
 				A675A9AD1DAFB99100C8E433 /* OBChooseLabelsCell.swift in Sources */,
@@ -533,7 +526,6 @@
 				A61CCED91DCFB54300B1B5D1 /* OBLabelsTableViewCell.swift in Sources */,
 				A61592811D8007FD00B8C814 /* OBMyBooksViewController.swift in Sources */,
 				A6B403381D8D6966001D045A /* CoreDataModel.xcdatamodeld in Sources */,
-				A6B4033D1D8D6B2A001D045A /* Book+CoreDataProperties.swift in Sources */,
 				A616D38B1D92C59000891166 /* OBTransactionsViewController.swift in Sources */,
 				A610F3401DA6F7DF0060149B /* UIViewController+Alert.swift in Sources */,
 				A61592841D8008DE00B8C814 /* OBRequestWrapper.swift in Sources */,
