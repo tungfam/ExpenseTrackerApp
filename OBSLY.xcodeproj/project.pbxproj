@@ -26,6 +26,8 @@
 		A61A16E61D9A6B1100996842 /* OBAddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61A16E51D9A6B1100996842 /* OBAddAccountViewController.swift */; };
 		A61CCED71DCFAF9500B1B5D1 /* OBChooseLabelsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61CCED61DCFAF9500B1B5D1 /* OBChooseLabelsTableViewController.swift */; };
 		A61CCED91DCFB54300B1B5D1 /* OBLabelsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61CCED81DCFB54300B1B5D1 /* OBLabelsTableViewCell.swift */; };
+		A62D55121E00BE0800BCEAB4 /* Book+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62D55101E00BE0800BCEAB4 /* Book+CoreDataClass.swift */; };
+		A62D55131E00BE0800BCEAB4 /* Book+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62D55111E00BE0800BCEAB4 /* Book+CoreDataProperties.swift */; };
 		A64CEC761D85ADCE00382E77 /* ShowDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64CEC751D85ADCE00382E77 /* ShowDataTableViewCell.swift */; };
 		A65E039C1D986AA200CFB8FA /* OBAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65E039B1D986AA200CFB8FA /* OBAccountsViewController.swift */; };
 		A66950411D82C54500F6FA0E /* OBAddBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66950401D82C54500F6FA0E /* OBAddBookViewController.swift */; };
@@ -86,6 +88,8 @@
 		A61A16E51D9A6B1100996842 /* OBAddAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBAddAccountViewController.swift; sourceTree = "<group>"; };
 		A61CCED61DCFAF9500B1B5D1 /* OBChooseLabelsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBChooseLabelsTableViewController.swift; sourceTree = "<group>"; };
 		A61CCED81DCFB54300B1B5D1 /* OBLabelsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBLabelsTableViewCell.swift; sourceTree = "<group>"; };
+		A62D55101E00BE0800BCEAB4 /* Book+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Book+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A62D55111E00BE0800BCEAB4 /* Book+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Book+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A64CEC751D85ADCE00382E77 /* ShowDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowDataTableViewCell.swift; sourceTree = "<group>"; };
 		A65E039B1D986AA200CFB8FA /* OBAccountsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBAccountsViewController.swift; sourceTree = "<group>"; };
 		A66950401D82C54500F6FA0E /* OBAddBookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBAddBookViewController.swift; sourceTree = "<group>"; };
@@ -151,10 +155,10 @@
 		A61128391D7D679200B6AC5A = {
 			isa = PBXGroup;
 			children = (
-				A61128441D7D679200B6AC5A /* OBSLY */,
-				A61128431D7D679200B6AC5A /* Products */,
 				A6B4033E1D8D6D8C001D045A /* Frameworks */,
+				A61128441D7D679200B6AC5A /* OBSLY */,
 				33A25A88854DCB39D0F7AB4C /* Pods */,
+				A61128431D7D679200B6AC5A /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -169,16 +173,16 @@
 		A61128441D7D679200B6AC5A /* OBSLY */ = {
 			isa = PBXGroup;
 			children = (
-				A615927F1D80079800B8C814 /* Controllers */,
-				A615927E1D80078A00B8C814 /* View */,
 				A66950421D82CB5300F6FA0E /* Cells */,
-				A615927D1D80077F00B8C814 /* Model */,
-				A61592821D80089F00B8C814 /* Networking */,
+				A615927F1D80079800B8C814 /* Controllers */,
 				A669504B1D845E7200F6FA0E /* Extensions */,
-				A61128591D7D687A00B6AC5A /* Resources */,
-				A61128451D7D679200B6AC5A /* AppDelegate.swift */,
+				A615927D1D80077F00B8C814 /* Model */,
 				A6B403391D8D697B001D045A /* Model */,
+				A61592821D80089F00B8C814 /* Networking */,
+				A61128591D7D687A00B6AC5A /* Resources */,
 				A66951471D847FBC00F6FA0E /* Supporting_files */,
+				A615927E1D80078A00B8C814 /* View */,
+				A61128451D7D679200B6AC5A /* AppDelegate.swift */,
 			);
 			path = OBSLY;
 			sourceTree = "<group>";
@@ -190,13 +194,17 @@
 				A611284C1D7D679200B6AC5A /* Assets.xcassets */,
 			);
 			name = Resources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		A615927D1D80077F00B8C814 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A62D55101E00BE0800BCEAB4 /* Book+CoreDataClass.swift */,
+				A62D55111E00BE0800BCEAB4 /* Book+CoreDataProperties.swift */,
 			);
 			name = Model;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		A615927E1D80078A00B8C814 /* View */ = {
@@ -206,6 +214,7 @@
 				A61128491D7D679200B6AC5A /* Main.storyboard */,
 			);
 			name = View;
+			path = View;
 			sourceTree = "<group>";
 		};
 		A615927F1D80079800B8C814 /* Controllers */ = {
@@ -215,6 +224,7 @@
 				A61A16E11D9A695E00996842 /* TabBar */,
 			);
 			name = Controllers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		A61592821D80089F00B8C814 /* Networking */ = {
@@ -223,38 +233,42 @@
 				A61592831D8008DE00B8C814 /* OBRequestWrapper.swift */,
 			);
 			name = Networking;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		A61A16E01D9A694600996842 /* Books */ = {
 			isa = PBXGroup;
 			children = (
-				A61592801D8007FD00B8C814 /* OBMyBooksViewController.swift */,
-				A66950401D82C54500F6FA0E /* OBAddBookViewController.swift */,
 				A60A1CF71DB3D046003B9411 /* OBAddBookQRViewController.swift */,
+				A66950401D82C54500F6FA0E /* OBAddBookViewController.swift */,
+				A61592801D8007FD00B8C814 /* OBMyBooksViewController.swift */,
 			);
 			name = Books;
+			path = Books;
 			sourceTree = "<group>";
 		};
 		A61A16E11D9A695E00996842 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
-				A61A16DC1D9A632D00996842 /* OBTabBarViewController.swift */,
-				A61A16E21D9A697700996842 /* Transactions */,
-				A61A16E31D9A698A00996842 /* Labels */,
 				A61A16E41D9A69B300996842 /* Accounts */,
+				A61A16E31D9A698A00996842 /* Labels */,
+				A61A16E21D9A697700996842 /* Transactions */,
+				A61A16DC1D9A632D00996842 /* OBTabBarViewController.swift */,
 			);
 			name = TabBar;
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 		A61A16E21D9A697700996842 /* Transactions */ = {
 			isa = PBXGroup;
 			children = (
-				A616D38A1D92C59000891166 /* OBTransactionsViewController.swift */,
 				A612C1E81DAB7E8C00BACF31 /* OBAddTransactionViewController.swift */,
 				A675A9B01DB01AF200C8E433 /* OBChooseAccountTableViewController.swift */,
 				A61CCED61DCFAF9500B1B5D1 /* OBChooseLabelsTableViewController.swift */,
+				A616D38A1D92C59000891166 /* OBTransactionsViewController.swift */,
 			);
 			name = Transactions;
+			path = Transactions;
 			sourceTree = "<group>";
 		};
 		A61A16E31D9A698A00996842 /* Labels */ = {
@@ -263,6 +277,7 @@
 				A61A16DE1D9A693800996842 /* OBLabelsViewController.swift */,
 			);
 			name = Labels;
+			path = Labels;
 			sourceTree = "<group>";
 		};
 		A61A16E41D9A69B300996842 /* Accounts */ = {
@@ -272,33 +287,36 @@
 				A61A16E51D9A6B1100996842 /* OBAddAccountViewController.swift */,
 			);
 			name = Accounts;
+			path = Accounts;
 			sourceTree = "<group>";
 		};
 		A66950421D82CB5300F6FA0E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				A60A1CF51DB3C14C003B9411 /* OBShowLabelsTableViewCell.swift */,
-				A6E19DF61DB15DA2003DFE8C /* OBShowTransactionTableViewCell.swift */,
-				A675A9AA1DAFB7D100C8E433 /* OBChooseAccountCellTableViewCell.swift */,
-				A675A9AC1DAFB99100C8E433 /* OBChooseLabelsCell.swift */,
-				A610F3411DA7077F0060149B /* OBAccountTableViewCell.swift */,
-				A61CCED81DCFB54300B1B5D1 /* OBLabelsTableViewCell.swift */,
-				A64CEC751D85ADCE00382E77 /* ShowDataTableViewCell.swift */,
 				A66950431D82CB9F00F6FA0E /* InputDataTableViewCell.swift */,
 				A66950441D82CB9F00F6FA0E /* InputDataTableViewCell.xib */,
+				A610F3411DA7077F0060149B /* OBAccountTableViewCell.swift */,
+				A675A9AA1DAFB7D100C8E433 /* OBChooseAccountCellTableViewCell.swift */,
+				A675A9AC1DAFB99100C8E433 /* OBChooseLabelsCell.swift */,
+				A61CCED81DCFB54300B1B5D1 /* OBLabelsTableViewCell.swift */,
+				A60A1CF51DB3C14C003B9411 /* OBShowLabelsTableViewCell.swift */,
+				A6E19DF61DB15DA2003DFE8C /* OBShowTransactionTableViewCell.swift */,
+				A64CEC751D85ADCE00382E77 /* ShowDataTableViewCell.swift */,
 			);
 			name = Cells;
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		A669504B1D845E7200F6FA0E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				A66951AA1D8488E300F6FA0E /* UIFont+OBFonts.swift */,
 				A610F33B1DA6E27A0060149B /* String+Checking.swift */,
 				A610F33D1DA6EE2E0060149B /* UIAlertController+PresentError.swift */,
+				A66951AA1D8488E300F6FA0E /* UIFont+OBFonts.swift */,
 				A610F33F1DA6F7DF0060149B /* UIViewController+Alert.swift */,
 			);
 			name = Extensions;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		A66951471D847FBC00F6FA0E /* Supporting_files */ = {
@@ -308,6 +326,7 @@
 				A6B403411D8D6EBB001D045A /* OBSLY-Prefix.pch */,
 			);
 			name = Supporting_files;
+			path = Supporting_files;
 			sourceTree = "<group>";
 		};
 		A66951551D8486A200F6FA0E /* San-Francisco-UI-and-COMPACT */ = {
@@ -345,6 +364,7 @@
 				A6B403421D8D7146001D045A /* DataController.swift */,
 			);
 			name = Model;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		A6B4033E1D8D6D8C001D045A /* Frameworks */ = {
@@ -505,6 +525,7 @@
 			files = (
 				A610F33C1DA6E27A0060149B /* String+Checking.swift in Sources */,
 				A66951AB1D8488E300F6FA0E /* UIFont+OBFonts.swift in Sources */,
+				A62D55121E00BE0800BCEAB4 /* Book+CoreDataClass.swift in Sources */,
 				A61A16DD1D9A632D00996842 /* OBTabBarViewController.swift in Sources */,
 				A61A16E61D9A6B1100996842 /* OBAddAccountViewController.swift in Sources */,
 				A675A9AB1DAFB7D100C8E433 /* OBChooseAccountCellTableViewCell.swift in Sources */,
@@ -525,6 +546,7 @@
 				A60A1CF81DB3D047003B9411 /* OBAddBookQRViewController.swift in Sources */,
 				A61CCED91DCFB54300B1B5D1 /* OBLabelsTableViewCell.swift in Sources */,
 				A61592811D8007FD00B8C814 /* OBMyBooksViewController.swift in Sources */,
+				A62D55131E00BE0800BCEAB4 /* Book+CoreDataProperties.swift in Sources */,
 				A6B403381D8D6966001D045A /* CoreDataModel.xcdatamodeld in Sources */,
 				A616D38B1D92C59000891166 /* OBTransactionsViewController.swift in Sources */,
 				A610F3401DA6F7DF0060149B /* UIViewController+Alert.swift in Sources */,
@@ -542,6 +564,7 @@
 				A611284A1D7D679200B6AC5A /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		A611284E1D7D679200B6AC5A /* LaunchScreen.storyboard */ = {
@@ -550,6 +573,7 @@
 				A611284F1D7D679200B6AC5A /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -646,7 +670,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/OBSLY-Prefix.pch";
-				INFOPLIST_FILE = OBSLY/Info.plist;
+				INFOPLIST_FILE = OBSLY/Supporting_files/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Tunik.OBSLY;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -663,7 +687,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/OBSLY-Prefix.pch";
-				INFOPLIST_FILE = OBSLY/Info.plist;
+				INFOPLIST_FILE = OBSLY/Supporting_files/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Tunik.OBSLY;
 				PRODUCT_NAME = "$(TARGET_NAME)";
