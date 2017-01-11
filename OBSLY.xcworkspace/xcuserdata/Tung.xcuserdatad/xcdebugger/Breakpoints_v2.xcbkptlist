@@ -257,38 +257,6 @@
             endingLineNumber = "85"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "OBSLY.OBAddTransactionViewController.tableView (__ObjC.UITableView, cellForRowAt : Foundation.IndexPath) -&gt; __ObjC.UITableViewCell"
-                  moduleName = "OBSLY"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Tung/Developer/OBSLY/OBSLY/OBAddTransactionViewController.swift"
-                  timestampString = "501692191.349284"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "52">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "OBSLY.OBAddTransactionViewController.tableView (__ObjC.UITableView, cellForRowAt : Foundation.IndexPath) -&gt; __ObjC.UITableViewCell"
-                  moduleName = "OBSLY"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Tung/Developer/OBSLY/OBSLY/OBAddTransactionViewController.swift"
-                  timestampString = "501692191.352848"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "100">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -304,6 +272,70 @@
             startingLineNumber = "84"
             endingLineNumber = "84"
             landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OBSLY/Controllers/TabBar/Transactions/OBAddTransactionViewController.swift"
+            timestampString = "505865647.288297"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
+            landmarkName = "reloadCurrencyTextFieldRow()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OBSLY.OBAddTransactionViewController.reloadCurrencyTextFieldRow () -&gt; ()"
+                  moduleName = "OBSLY"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Tung/Developer/OBSLY/OBSLY/Controllers/TabBar/Transactions/OBAddTransactionViewController.swift"
+                  timestampString = "505865046.542978"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "189"
+                  endingLineNumber = "189"
+                  offsetFromSymbolStart = "1320">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OBSLY.OBAddTransactionViewController.(reloadCurrencyTextFieldRow () -&gt; ()).(closure #1)"
+                  moduleName = "OBSLY"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Tung/Developer/OBSLY/OBSLY/Controllers/TabBar/Transactions/OBAddTransactionViewController.swift"
+                  timestampString = "505865046.553014"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "190"
+                  endingLineNumber = "190"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OBSLY/Controllers/TabBar/Transactions/OBAddTransactionViewController.swift"
+            timestampString = "505867312.340973"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "346"
+            endingLineNumber = "346"
+            landmarkName = "showAlertOfWrongFormat()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

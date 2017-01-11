@@ -38,7 +38,7 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
     var currencyArray = [String]()
     var datePickerView = UIDatePicker()
     var currencyPickerView = UIPickerView()
-    var selectedCurrency = ""
+    var selectedCurrency = "USD" // for now this is default
     let dateRowIndexPath = IndexPath.init(row: 3, section: 0)
     let currencyRowIndexPath = IndexPath.init(row: 4, section: 0)
     let rateRowIndexPath = IndexPath.init(row: 5, section: 0)
@@ -54,6 +54,8 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
         self.transactionsTableView.dataSource = self
         currencyPickerView.delegate = self
         currencyPickerView.dataSource = self
+        
+        
         
         // we set empty chosen account so that when user chooses the account we show chosen data
         defaults.set("Choose account", forKey: "chosenAccountName")
@@ -116,7 +118,7 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
                     nibCell.fieldValue.inputAccessoryView = toolBar
                     nibCell.fieldValue.inputView = currencyPickerView
                     nibCell.fieldValue.text = selectedCurrency
-                    nibCell.delegate = self
+//                    nibCell.delegate = self // commented out cuz it was causing emptying of 1st row when selecting currency. it was delegating 'startEditing' so that it would move table view up 
                     break
                 case .rate:
                     nibCell.fieldValue.keyboardType = UIKeyboardType.decimalPad
@@ -268,59 +270,62 @@ class OBAddTransactionViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
-        if showAlertOfWrongFormat() {
-            for i in (0..<inputFieldsArray.count)    {
-                let index = IndexPath.init(item: i, section: 0)
-                
-                if i == OBTableRow.account.rawValue    {
-                    let accountID = defaults.string(forKey: "chosenAccountID")
-                    let paramNameInDict = paramsForPostTransaction[i]
-                    dictWithTransactionData[paramNameInDict] = accountID as AnyObject?
-                }
-                else if i == OBTableRow.labels.rawValue {
-                    let labelsArray = defaults.array(forKey: "chosenLabelsArray")
-                    let paramNameInDict = paramsForPostTransaction[i]
-                    let finalArray = NSMutableArray()
-                    finalArray.addObjects(from: labelsArray!)
-                    print(labelsArray)
-                    dictWithTransactionData[paramNameInDict] = finalArray as AnyObject?
-                    print(dictWithTransactionData)
-                }
-                
-                let cell = self.transactionsTableView.cellForRow(at: index)
-                for view: UIView in cell!.contentView.subviews {
-                    if (view is UITextField) {
-                        let inputField = (view as! UITextField)
-                        // adding value to dictionary
-                        if i == OBTableRow.amount.rawValue || i == OBTableRow.rate.rawValue    {
-                            let numberValue : Float = NSString(string: inputField.text!).floatValue
-                            let paramNameInDict = paramsForPostTransaction[i]
-                            dictWithTransactionData[paramNameInDict] = numberValue as AnyObject?
-                        }
-                        else if i == OBTableRow.date.rawValue   {
-                            let paramNameInDict = paramsForPostTransaction[i]
-                            let date = self.datePickerView.date
-                            let formatter = ISO8601DateFormatter()
-//                            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
-//                            formatter.timeZone = TimeZone(secondsFromGMT: 0)
-//                            formatter.locale = Locale(identifier: "en_US_POSIX")
-                            let timeString = formatter.string(from: date)
-                            dictWithTransactionData[paramNameInDict] = timeString as AnyObject?
-                        }
-                        else  { // currency and note 
-                            let valueToPass = inputField.text
-                            let paramNameInDict = paramsForPostTransaction[i]
-                            dictWithTransactionData[paramNameInDict] = valueToPass as AnyObject?
+        self.transactionsTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        
+        let dispatchTime = DispatchTime.now() + 0.3 // ждем пока опустится строка и пропала клава и потом сохраняем
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
+            if self.showAlertOfWrongFormat() {
+                for i in (0..<self.inputFieldsArray.count)    {
+                    let index = IndexPath.init(item: i, section: 0)
+                    
+                    if i == OBTableRow.account.rawValue    {
+                        let accountID = self.defaults.string(forKey: "chosenAccountID")
+                        let paramNameInDict = self.paramsForPostTransaction[i]
+                        self.dictWithTransactionData[paramNameInDict] = accountID as AnyObject?
+                    }
+                    else if i == OBTableRow.labels.rawValue {
+                        let labelsArray = self.defaults.array(forKey: "chosenLabelsArray")
+                        let paramNameInDict = self.paramsForPostTransaction[i]
+                        let finalArray = NSMutableArray()
+                        finalArray.addObjects(from: labelsArray!)
+                        self.dictWithTransactionData[paramNameInDict] = finalArray as AnyObject?
+                    }
+                    
+                    let cell = self.transactionsTableView.cellForRow(at: index)
+                    for view: UIView in cell!.contentView.subviews {
+                        if (view is UITextField) {
+                            let inputField = (view as! UITextField)
+                            // adding value to dictionary
+                            if i == OBTableRow.amount.rawValue || i == OBTableRow.rate.rawValue    {
+                                let numberValue : Float = NSString(string: inputField.text!).floatValue
+                                let paramNameInDict = self.paramsForPostTransaction[i]
+                                self.dictWithTransactionData[paramNameInDict] = numberValue as AnyObject?
+                            }
+                            else if i == OBTableRow.date.rawValue   {
+                                let paramNameInDict = self.paramsForPostTransaction[i]
+                                let date = self.datePickerView.date
+                                let formatter = ISO8601DateFormatter()
+                                //                            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+                                //                            formatter.timeZone = TimeZone(secondsFromGMT: 0)
+                                //                            formatter.locale = Locale(identifier: "en_US_POSIX")
+                                let timeString = formatter.string(from: date)
+                                self.dictWithTransactionData[paramNameInDict] = timeString as AnyObject?
+                            }
+                            else  { // currency and note
+                                let valueToPass = inputField.text
+                                let paramNameInDict = self.paramsForPostTransaction[i]
+                                self.dictWithTransactionData[paramNameInDict] = valueToPass as AnyObject?
+                            }
                         }
                     }
                 }
+                self.postTransaction()
             }
-            postTransaction()
+            else {
+                // wrong value format in input fields
+            }
         }
-        else {
-            // wrong value format in input fields
-        }
-
+        
     }
     
     @IBAction func openChooseAccount(_ sender: UIButton) {
